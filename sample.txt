@@ -1,6 +1,0 @@
-subject name,subject code,full mark
-Student name,Student number,Student Activities mark,Oral/Practical mark,Midterm exam mark,Final exam mark
-Bishoy Yousry,1900733,10,10,20,60
-Omar Osama,1800453,10,9,10,50
-Zeyad Mohamed,1705743,8,8,14,55
-Malek,1534984,5,9,20,60
