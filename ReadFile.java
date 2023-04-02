@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 public class ReadFile {
 	int index = 0;
-	String[][] student = new String[5][0];
+	String[][] student;
 	String[] course = new String[3];
 	String split = ",";
 
