@@ -23,7 +23,7 @@ public class ReadFile {
 		try {
 
 			Long lines = Files.lines(path).count();
-			student = new String[5][lines.intValue()];
+			student = new String[5][lines.intValue()-1];
   
 		} catch (IOException e) {
 			System.out.println("Exception: " + e);
