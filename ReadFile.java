@@ -13,7 +13,16 @@ public class ReadFile {
 	String[][] student;
 	String[] course = new String[3];
 	String split = ",";
-
+/*---------------------------------------------------------------------------
+ * [Function Name]: readFile
+ *
+ * [Description]:  Function read file and extract students and courses information from it
+ *
+ * [Args]:         filePath: a String
+ *
+ * [Returns]:      Void
+ *
+ ----------------------------------------------------------------------------------*/
 	public void readFile(String filePath)
 	{
 		String myline;
@@ -22,8 +31,8 @@ public class ReadFile {
 
 		try {
 
-			Long lines = Files.lines(path).count();
-			student = new String[5][lines.intValue()-1];
+			Long lines = Files.lines(path).count();		//get number of lines
+			student = new String[5][lines.intValue()-1]; 	//specify the array size
   
 		} catch (IOException e) {
 			System.out.println("Exception: " + e);
@@ -38,7 +47,6 @@ public class ReadFile {
 	       while((myline = bufread.readLine()) != null){
 				String[] splitted = myline.split(split);
 				manipulation(splitted);
-	          	// System.out.println(myline);
 		   }
 	       bufread.close();
 		   print_result();
@@ -49,26 +57,48 @@ public class ReadFile {
 	       System.out.println("Exception: " + e);
 	    }
 	}
-
+	
+/*---------------------------------------------------------------------------
+ * [Function Name]: manipulation
+ *
+ * [Description]:  manipulation information ethier it is student info or course info 
+ *
+ * [Args]:         splitted: an array of strings
+ *
+ * [Returns]:      Void
+ *
+ ----------------------------------------------------------------------------------*/
+	
 	public void manipulation(String[] splitted){
 		if (splitted.length > 3){
-			student[0][index] = splitted[0];						// Student Name
-			student[1][index] = splitted[1];						// Student Number	
+			student[0][index] = splitted[0];					// Student Name
+			student[1][index] = splitted[1];					// Student Number	
 
 			Integer mark = Integer.parseInt(splitted[2]) + Integer.parseInt(splitted[3]) + Integer.parseInt(splitted[4]) + Integer.parseInt(splitted[5]);
 			
 			student[2][index] = Integer.toString(mark);				// Student Mark	
 			student[3][index] = Mark_to_Grade(mark);				// Student Grade
-			student[4][index] = Grade_to_GPA(student[3][index]);	// Student GPA
+			student[4][index] = Grade_to_GPA(student[3][index]);			// Student GPA
 			index++;
 
 		}else{
-			course[0] = splitted[0];								// Course Name
-			course[1] = splitted[1];								// Course Code
-			course[2] = splitted[2];								// Course Full Mark
+			course[0] = splitted[0];						// Course Name
+			course[1] = splitted[1];						// Course Code
+			course[2] = splitted[2];						// Course Full Mark
 		}
 	}
 
+/*---------------------------------------------------------------------------
+ * [Function Name]: Mark_to_Grade
+ *
+ * [Description]:  get the student mark and convert it into what is equivalent in grade letters
+ *
+ * [Args]:         mark: an Integer
+ *
+ * [Returns]:      String
+ *
+ ----------------------------------------------------------------------------------*/
+	
 	public String Mark_to_Grade(Integer mark) {
 		String Grade;
 		if(mark >= 97)
@@ -98,7 +128,18 @@ public class ReadFile {
 	
 		return Grade;
 	}
-
+	
+/*---------------------------------------------------------------------------
+ * [Function Name]: Grade_to_GPA
+ *
+ * [Description]:  get the student grade and convert it into what is equivalent in GPA
+ *
+ * [Args]:         grade: a String
+ *
+ * [Returns]:      String
+ *
+ ----------------------------------------------------------------------------------*/
+	
 	public String Grade_to_GPA(String grade){
 		String GPA;
 
@@ -128,12 +169,18 @@ public class ReadFile {
 		return GPA;
 	}
 
+/*---------------------------------------------------------------------------
+ * [Function Name]: print_result()
+ *
+ * [Description]:  print students and courses information arrays
+ *
+ * [Args]:         Void
+ *
+ * [Returns]:      Void
+ *
+ ----------------------------------------------------------------------------------*/
+	
 	public void print_result(){
-		// System.out.println("Subject Name: " + course[0] + "\tMax Mark: " + course[2] + "\n");
-		// System.out.println("Student name \t Student number \t GPA \t Grade");
-		// for(int i = 0; i < index; i++)
-		// 	System.out.println(student[0][i] + " \t " + student[1][i] + " \t\t " + student[4][i] + " \t " + student[3][i] );
-
 		try {
 			File myObj = new File("./result.txt");
 			if (myObj.createNewFile()) {
@@ -143,7 +190,10 @@ public class ReadFile {
 			}
 
 			FileWriter myWriter = new FileWriter("./result.txt");
+			//print course information
 			myWriter.write("Subject Name: " + course[0] + "\t\tMax Mark: " + course[2] + "\n\n");
+			
+			//print students information
 			myWriter.write("Student name \t| Student number \t| GPA \t| Grade" + "\n---------------------------------------------------\n");
 			for(int i = 0; i < index; i++)
 				myWriter.write(student[0][i] + " \t| " + student[1][i] + " \t\t\t| " + student[4][i] + " \t| " + student[3][i] + "\n");
