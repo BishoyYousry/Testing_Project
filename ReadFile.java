@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ReadFile {
+public class ReadWrite {
 	int index = 0;
 	String[][] student;
 	String[] course = new String[3];
