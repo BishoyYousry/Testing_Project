@@ -12,7 +12,6 @@ public class ReadWrite {
 	int index = 0;
 	String[][] student;
 	String[] course = new String[3];
-	String split = ",";
 /*---------------------------------------------------------------------------
  * [Function Name]: readFile
  *
@@ -31,7 +30,7 @@ public class ReadWrite {
 
 		try {
 
-			Long lines = Files.lines(path).count();		//get number of lines
+			Long lines = Files.lines(path).count();			//get number of lines
 			student = new String[5][lines.intValue()-1]; 	//specify the array size
   
 		} catch (IOException e) {
@@ -45,8 +44,8 @@ public class ReadWrite {
 	       
 	       // reading the file, line by line
 	       while((myline = bufread.readLine()) != null){
-				String[] splitted = myline.split(split);
-					manipulation(splitted);
+				String[] splitted = myline.split(",");
+				manipulation(splitted);
 		   }
 	       bufread.close();
 		   print_result();
@@ -69,7 +68,7 @@ public class ReadWrite {
  *
  ----------------------------------------------------------------------------------*/
 
-	public void manipulation(String[] splitted){
+	public void manipulation(String[] splitted) {
 		if (splitted.length > 3){
 			student[0][index] = splitted[0];					// Student Name
 			student[1][index] = splitted[1];					// Student Number
@@ -77,8 +76,8 @@ public class ReadWrite {
 			Integer mark = Integer.parseInt(splitted[2]) + Integer.parseInt(splitted[3]) + Integer.parseInt(splitted[4]) + Integer.parseInt(splitted[5]);						
 			
 			student[2][index] = Integer.toString(mark);				// Student Mark	
-			student[3][index] = Mark_to_Grade(mark);				// Student Grade
-			student[4][index] = Grade_to_GPA(student[3][index]);			// Student GPA
+			student[3][index] = markToGrade(mark);				// Student Grade
+			student[4][index] = gradeToGpa(student[3][index]);			// Student GPA
 			index++;
 
 		}else{
@@ -102,7 +101,7 @@ public class ReadWrite {
  ----------------------------------------------------------------------------------*/
 	
 
-	public String Mark_to_Grade(Integer mark) {
+	public String markToGrade(Integer mark) {
 		String Grade;
 		if(mark >= 97)
 			Grade = "A+";
@@ -146,7 +145,7 @@ public class ReadWrite {
  ----------------------------------------------------------------------------------*/
 
 	
-	public String Grade_to_GPA(String grade){
+	public String gradeToGpa(String grade){
 		String GPA;
 
 		if(grade == "F")
@@ -210,5 +209,4 @@ public class ReadWrite {
 		  }
 	}
 }
-
 
