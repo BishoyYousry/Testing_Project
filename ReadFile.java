@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ReadFile {
-	int index = 0, line = 0;
+	int index = 0;
 	String[][] student;
 	String[] course = new String[3];
 	String split = ",";
@@ -46,9 +46,7 @@ public class ReadFile {
 	       // reading the file, line by line
 	       while((myline = bufread.readLine()) != null){
 				String[] splitted = myline.split(split);
-				if(line != 1)
 					manipulation(splitted);
-				line++;
 		   }
 	       bufread.close();
 		   print_result();
@@ -204,7 +202,7 @@ public class ReadFile {
 			//print students information
 			myWriter.write("Student name \t| Student number \t| GPA \t| Grade" + "\n---------------------------------------------------\n");
 			for(int i = 0; i < index; i++)
-				myWriter.write(student[0][i] + " \t| " + student[1][i] + " \t\t\t| " + student[4][i] + " \t| " + student[3][i] + "\n");
+				myWriter.write(student[0][i] + " \t| " + student[1][i] + " \t\t| " + student[4][i] + " \t| " + student[3][i] + "\n");
 			myWriter.close();
 
 		  } catch (IOException e) {
@@ -212,4 +210,5 @@ public class ReadFile {
 		  }
 	}
 }
+
 
