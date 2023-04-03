@@ -1,0 +1,6 @@
+Computer Organization,CSE221s,100
+Bishoy Yousry,1900733,5,-7,-6,55
+Youssef Emad,1704764,10,10,20,60
+Omar AMonem,1800453,10,9,-10,50
+Zeyad Mohamed,1705743,8,8,14,35
+Malek Malek,1534984,5,3,16,60
