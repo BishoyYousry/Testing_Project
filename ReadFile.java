@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ReadFile {
-	int index = 0;
+	int index = 0, line = 0;
 	String[][] student;
 	String[] course = new String[3];
 	String split = ",";
@@ -23,7 +23,7 @@ public class ReadFile {
  * [Returns]:      Void
  *
  ----------------------------------------------------------------------------------*/
-	public void readFile(String filePath)
+	public void readWrite(String filePath)
 	{
 		String myline;
 
@@ -46,7 +46,9 @@ public class ReadFile {
 	       // reading the file, line by line
 	       while((myline = bufread.readLine()) != null){
 				String[] splitted = myline.split(split);
-				manipulation(splitted);
+				if(line != 1)
+					manipulation(splitted);
+				line++;
 		   }
 	       bufread.close();
 		   print_result();
@@ -68,13 +70,13 @@ public class ReadFile {
  * [Returns]:      Void
  *
  ----------------------------------------------------------------------------------*/
-	
+
 	public void manipulation(String[] splitted){
 		if (splitted.length > 3){
 			student[0][index] = splitted[0];					// Student Name
-			student[1][index] = splitted[1];					// Student Number	
-
-			Integer mark = Integer.parseInt(splitted[2]) + Integer.parseInt(splitted[3]) + Integer.parseInt(splitted[4]) + Integer.parseInt(splitted[5]);
+			student[1][index] = splitted[1];					// Student Number
+			
+			Integer mark = Integer.parseInt(splitted[2]) + Integer.parseInt(splitted[3]) + Integer.parseInt(splitted[4]) + Integer.parseInt(splitted[5]);						
 			
 			student[2][index] = Integer.toString(mark);				// Student Mark	
 			student[3][index] = Mark_to_Grade(mark);				// Student Grade
@@ -88,6 +90,8 @@ public class ReadFile {
 		}
 	}
 
+
+
 /*---------------------------------------------------------------------------
  * [Function Name]: Mark_to_Grade
  *
@@ -99,6 +103,7 @@ public class ReadFile {
  *
  ----------------------------------------------------------------------------------*/
 	
+
 	public String Mark_to_Grade(Integer mark) {
 		String Grade;
 		if(mark >= 97)
@@ -129,6 +134,8 @@ public class ReadFile {
 		return Grade;
 	}
 	
+	
+	
 /*---------------------------------------------------------------------------
  * [Function Name]: Grade_to_GPA
  *
@@ -139,6 +146,7 @@ public class ReadFile {
  * [Returns]:      String
  *
  ----------------------------------------------------------------------------------*/
+
 	
 	public String Grade_to_GPA(String grade){
 		String GPA;
@@ -182,14 +190,14 @@ public class ReadFile {
 	
 	public void print_result(){
 		try {
-			File myObj = new File("./result.txt");
+			File myObj = new File("/media/bishoy/6E90FAC190FA8F39/ASU/Senior1/2nd Term/SW Testing/Project_Invironment/src/result.txt");
 			if (myObj.createNewFile()) {
 			  	System.out.println("File created: " + myObj.getName());
 			} else {
 			  	System.out.println("File already exists.");
 			}
 
-			FileWriter myWriter = new FileWriter("./result.txt");
+			FileWriter myWriter = new FileWriter("/media/bishoy/6E90FAC190FA8F39/ASU/Senior1/2nd Term/SW Testing/Project_Invironment/src/result.txt");
 			//print course information
 			myWriter.write("Subject Name: " + course[0] + "\t\tMax Mark: " + course[2] + "\n\n");
 			
@@ -204,3 +212,4 @@ public class ReadFile {
 		  }
 	}
 }
+
