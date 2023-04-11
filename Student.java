@@ -1,4 +1,3 @@
-package Courses_and_Students;
 
 public class Student {
 	private String name;
@@ -10,6 +9,32 @@ public class Student {
 	private int totalMark;
 	private String grade;
 	private float gpa;
+	
+	
+	public Student() {
+		super();
+	}
+	
+	public Student(String name, String id, String grade, float gpa) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.grade = grade;
+		this.gpa = gpa;
+	}
+
+	public Student(String name, String id, int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark,
+			int totalMark) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.activitiesMark = activitiesMark;
+		this.oralPracticalMark = oralPracticalMark;
+		this.midtermMark = midtermMark;
+		this.finalMark = finalMark;
+		this.totalMark = totalMark;
+	}
+
 	public Student(String name, String id, int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark,
 			int totalMark, String grade, float gpa) {
 		super();
