@@ -1,4 +1,4 @@
-package Courses_and_Students;
+package Pack1;
 
 
 public class Calculator {
@@ -10,7 +10,7 @@ public class Calculator {
      * Output: Total Student Marks: int
      * 
      */
-    public int compute_total_mark(int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark){
+    public static int compute_total_mark(int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark){
         return (activitiesMark+oralPracticalMark+midtermMark+finalMark);
     }
 
@@ -22,7 +22,7 @@ public class Calculator {
      * Output: Student Grade: String
      * 
      */    
-    public String compute_Grade(int mark){
+    public static String compute_Grade(int mark){
 		String Grade;
 		if(mark >= 97)
 			Grade = "A+";
@@ -60,7 +60,7 @@ public class Calculator {
      * Output: Student GPA: String
      * 
      */
-    public String compute_GPA(String Grade){
+    public static String compute_GPA(String Grade){
 		String GPA;
 
 		if(Grade == "F")

@@ -1,3 +1,4 @@
+package Pack1;
 
 public class Student {
 	private String name;
@@ -8,14 +9,14 @@ public class Student {
 	private int finalMark;
 	private int totalMark;
 	private String grade;
-	private float gpa;
+	private String gpa;
 	
 	
 	public Student() {
 		super();
 	}
 	
-	public Student(String name, String id, String grade, float gpa) {
+	public Student(String name, String id, String grade, String gpa) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -36,7 +37,7 @@ public class Student {
 	}
 
 	public Student(String name, String id, int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark,
-			int totalMark, String grade, float gpa) {
+			int totalMark, String grade, String gpa) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -96,10 +97,10 @@ public class Student {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	public float getGpa() {
+	public String getGpa() {
 		return gpa;
 	}
-	public void setGpa(float gpa) {
+	public void setGpa(String gpa) {
 		this.gpa = gpa;
 	}
 	

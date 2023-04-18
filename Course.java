@@ -1,46 +1,23 @@
+package Pack1;
 
 public class Course {
 	private String name;
 	private String code;
-	private final int activitiesFullMark;
-	private final int oralPracticalFullMark;
-	private final int midtermFullMark;
-	private final int finalFullMark;
-	private final int totalFullMark;
+	static final int activitiesFullMark = 10;
+	static private final int oralPracticalFullMark = 10;
+	static private final int midtermFullMark = 20;
+	static private final int finalFullMark = 60;
+	static private final int totalFullMark = 100;
 
-
-	public Course() {
-		super();
-		activitiesFullMark = 10;
-		oralPracticalFullMark = 10;
-		midtermFullMark = 20;
-		finalFullMark = 60;
-		totalFullMark = 100;
+	public Course()
+	{
+		
 	}
 	
 	
 	public Course(String name, String code) {
-		super();
 		this.name = name;
 		this.code = code;
-		activitiesFullMark = 10;
-		oralPracticalFullMark = 10;
-		midtermFullMark = 20;
-		finalFullMark = 60;
-		totalFullMark = 100;
-	}
-
-
-	public Course(String name, String code, int activitiesFullMark, int oralPracticalFullMark, int midtermFullMark,
-			int finalFullMark, int totalFullMark) {
-		super();
-		this.name = name;
-		this.code = code;
-		this.activitiesFullMark = activitiesFullMark;
-		this.oralPracticalFullMark = oralPracticalFullMark;
-		this.midtermFullMark = midtermFullMark;
-		this.finalFullMark = finalFullMark;
-		this.totalFullMark = totalFullMark;
 	}
 
 

@@ -1,3 +1,5 @@
+package Pack1;
+
 import java.io.*;
 import java.util.ArrayList;
 public class FileIO
@@ -126,7 +128,7 @@ public class FileIO
                 writer.append(student.getId());
                 writer.append(',');
                 writer.append(',');
-                writer.append(Float.toString(student.getGpa()));
+                writer.append(student.getGpa());
                 writer.append(',');
                 writer.append(',');
                 writer.append(student.getGrade());
