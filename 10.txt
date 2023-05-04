@@ -1,2 +1,0 @@
-Computer Organization,CSE221s,100
-Bishoy Yousry,1900733,15,17,16,70
