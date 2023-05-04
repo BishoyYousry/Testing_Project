@@ -1,4 +1,4 @@
-package Pack1;
+package program;
 
 public class Course {
 	private String name;

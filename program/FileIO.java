@@ -1,7 +1,9 @@
-package Pack1;
+package program;
 
 import java.io.*;
 import java.util.ArrayList;
+
+import Exceptions.InvalidStudentNameException;
 public class FileIO
 {
     private String path;
@@ -169,7 +171,11 @@ public class FileIO
         else
         {
             Student student = new Student();
-                    student.setName(words[0]);
+                    try {
+						student.setName(words[0]);
+					} catch (InvalidStudentNameException e) {
+						System.out.println(e);
+					}
                     student.setId(words[1]);
                     student.setActivitiesMark(Integer.parseInt(words[2]));
                     student.setOralPracticalMark(Integer.parseInt(words[3]));

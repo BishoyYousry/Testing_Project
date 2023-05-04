@@ -1,4 +1,5 @@
-package Pack1;
+package program;
+import Exceptions.*; 
 
 public class Student {
 	private String name;
@@ -49,18 +50,50 @@ public class Student {
 		this.grade = grade;
 		this.gpa = gpa;
 	}
-	public String getName() {
+	public String getName() {		
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	
+	/* @Function Name: setName
+	 * 
+	 * @Inputs: Student name
+	 * 
+	 * @Description: Set the student name if the following conditions are achieved:
+	 *  			  1- student name must be Alphabetic characters
+	 *  			  2- has at least one space
+	 *  			  3- should not start with space
+	 * */
+	
+	public void setName(String name) throws InvalidStudentNameException{		
+		if(!name.matches("[a-zA-Z ]+"))
+			throw new InvalidStudentNameException(InvalidStudentNameException.INVALID_STUDENT_NAME_ALPHABETS);		
+		if(name.charAt(0) == ' ')
+			throw new InvalidStudentNameException(InvalidStudentNameException.INVALID_STUDENT_NAME_STARTS_WITH_SPACE);
+		if(!name.contains(" "))
+			throw new InvalidStudentNameException(InvalidStudentNameException.INVALID_STUDENT_NAME_ONE_SPACE);
+		else
+			this.name = name;
+			
 	}
+	
+	
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
+	
+	/* @Function Name: setId
+	 * 
+	 * @Inputs: Student id
+	 * 
+	 * @Description: Set the student id if the following conditions are achieved:
+	 *  			1- Student Id must be alphanumeric characters
+	 *  			2- Student Id length = 8 chars
+	 *  			3- Student Id should start with numbers, and might end with only one alphabetic character
+	 * */
+	public void setId(String id) {		
 		this.id = id;
 	}
+	
 	public int getActivitiesMark() {
 		return activitiesMark;
 	}
