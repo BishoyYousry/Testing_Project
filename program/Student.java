@@ -90,11 +90,12 @@ public class Student {
 	 *  			2- Student Id length = 8 chars
 	 *  			3- Student Id should start with numbers, and might end with only one alphabetic character
 	 * */
+	
 	public void setId(String id) throws InvalidStudentIdException {
 		if(id.length()!= 8)
-			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_8Chars);
+			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_INVLID_LENGTH);
 		else if(id.charAt(0)<'0'&&id.charAt(0)>'9')
-			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_START_WITH_NUMBERS );
+			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_DOESNOT_START_WITH_NUMBERS );
 		else if((id.charAt(7)<'0'&&id.charAt(7)>'9')||(id.charAt(7)<'a'&&id.charAt(7)>'z')||(id.charAt(7)<'A'&&id.charAt(7)>'Z'))
 			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_ALPHANUMERIC );
 		else

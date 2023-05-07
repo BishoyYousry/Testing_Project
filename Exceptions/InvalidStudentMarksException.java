@@ -10,7 +10,7 @@ public class InvalidStudentMarksException extends Exception {
 	public static final String INVALID_STUDENT_FINAL_MARK = "Student activities range must be between 0 to 60";
 	public static final String INVALID_STUDENT_TOTOAL_MARK = "Student activities range must be between 0 to 100";
 	
-	InvalidStudentMarksException(){
+	public InvalidStudentMarksException(){
 		super();
 	}
 	

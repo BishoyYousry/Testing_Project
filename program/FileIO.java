@@ -3,6 +3,10 @@ package program;
 import java.io.*;
 import java.util.ArrayList;
 
+import Exceptions.InvalidCourseCodeException;
+import Exceptions.InvalidCourseNameException;
+import Exceptions.InvalidStudentIdException;
+import Exceptions.InvalidStudentMarksException;
 import Exceptions.InvalidStudentNameException;
 public class FileIO
 {
@@ -165,23 +169,72 @@ public class FileIO
         String[] words =line.split(",");
         if(lineNumber == 0)
         {
-            course.setName(words[0]);
-            course.setCode(words[1]);
+            try {
+				course.setName(words[0]);
+			} catch (InvalidCourseNameException e) {				
+				System.out.println(e);
+			}
+            try {
+				course.setCode(words[1]);
+			} catch (InvalidCourseCodeException e) {				
+				System.out.println(e);
+			}
         }
         else
         {
             Student student = new Student();
+            
                     try {
 						student.setName(words[0]);
 					} catch (InvalidStudentNameException e) {
 						System.out.println(e);
 					}
-                    student.setId(words[1]);
-                    student.setActivitiesMark(Integer.parseInt(words[2]));
-                    student.setOralPracticalMark(Integer.parseInt(words[3]));
-                    student.setMidtermMark(Integer.parseInt(words[4]));
-                    student.setFinalMark(Integer.parseInt(words[5]));
-                    student.setTotalMark(Calculator.compute_total_mark(student.getActivitiesMark(),student.getOralPracticalMark(),student.getMidtermMark(),student.getFinalMark()));
+                    
+                    try {
+						student.setId(words[1]);
+					} catch (InvalidStudentIdException e) {
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setActivitiesMark(Integer.parseInt(words[2]));
+					} catch (NumberFormatException e) {
+						System.out.println(e);
+					} catch (InvalidStudentMarksException e) {
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setOralPracticalMark(Integer.parseInt(words[3]));
+					} catch (NumberFormatException e) {						
+						System.out.println(e);
+					} catch (InvalidStudentMarksException e) {
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setMidtermMark(Integer.parseInt(words[4]));
+					} catch (NumberFormatException e) {
+						
+						System.out.println(e);
+					} catch (InvalidStudentMarksException e) {
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setFinalMark(Integer.parseInt(words[5]));
+					} catch (NumberFormatException e) {						
+						System.out.println(e);
+					} catch (InvalidStudentMarksException e) {						
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setTotalMark(Calculator.compute_total_mark(student.getActivitiesMark(),student.getOralPracticalMark(),student.getMidtermMark(),student.getFinalMark()));
+					} catch (InvalidStudentMarksException e) {						
+						System.out.println(e);
+					}
+                    
                     student.setGrade(Calculator.compute_Grade(student.getTotalMark()));
                     student.setGpa(Calculator.compute_GPA(student.getGrade()));
             students.add(student);

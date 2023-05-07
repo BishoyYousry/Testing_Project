@@ -2,6 +2,10 @@ package program;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Exceptions.InvalidStudentIdException;
@@ -10,7 +14,13 @@ import Exceptions.InvalidStudentNameException;
 class Test_Student {
 
 	private Student student = new Student();
-	
+	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+	@BeforeEach
+	public void setUp()
+	{
+	    System.setOut(new PrintStream(outputStreamCaptor));
+	}
 	
 	@Test
 	void test_setName_PositiveTesting() {
@@ -67,10 +77,10 @@ class Test_Student {
 	
 	@Test
 	void test_setId_PositiveTesting()
-	{
+	{				
 		String expected = "1900733s";
-		student.setId("1900733s");
-		assertEquals(expected, student.getId(), "Test_Student::test_setId_PositiveTesting");
+		assertDoesNotThrow(() -> student.setId("1900733s"), "Test_Student::test_setId_PositiveTesting::Should not throw an exception");
+		assertEquals(expected, student.getId(), "Test_Student::test_setId_PositiveTesting::The id must be stored");
 	}
 	
 	
@@ -80,7 +90,7 @@ class Test_Student {
 		InvalidStudentIdException exception = assertThrows(InvalidStudentIdException.class, () -> {
 			student.setId("s1900733");
 		});
-		String expectedMessage = InvalidStudentIdException.INVALID_STUDENT_ID_ALPHANUMERIC;
+		String expectedMessage = InvalidStudentIdException.INVALID_STUDENT_ID_DOESNOT_START_WITH_NUMBERS;
 	    String actualMessage = exception.getMessage();
 	    assertTrue(actualMessage.contains(expectedMessage), "Test_Student::test_setId_IDMustBeAlphanumeric");
 	}
