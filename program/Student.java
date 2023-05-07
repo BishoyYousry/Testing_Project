@@ -90,39 +90,61 @@ public class Student {
 	 *  			2- Student Id length = 8 chars
 	 *  			3- Student Id should start with numbers, and might end with only one alphabetic character
 	 * */
-	public void setId(String id) {		
-		this.id = id;
+	public void setId(String id) throws InvalidStudentIdException {
+		if(id.length()!= 8)
+			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_8Chars);
+		else if(id.charAt(0)<'0'&&id.charAt(0)>'9')
+			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_START_WITH_NUMBERS );
+		else if((id.charAt(7)<'0'&&id.charAt(7)>'9')||(id.charAt(7)<'a'&&id.charAt(7)>'z')||(id.charAt(7)<'A'&&id.charAt(7)>'Z'))
+			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_ALPHANUMERIC );
+		else
+			this.id = id;
 	}
 	
-	public int getActivitiesMark() {
+	public int getActivitiesMark(){
 		return activitiesMark;
 	}
-	public void setActivitiesMark(int activitiesMark) {
-		this.activitiesMark = activitiesMark;
+	public void setActivitiesMark(int activitiesMark) throws InvalidStudentMarksException{
+		if(activitiesMark<0 && activitiesMark>10)
+			throw new InvalidStudentMarksException(InvalidStudentMarksException.INVALID_STUDENT_ACTIVITIES_MARK);
+		else
+			this.activitiesMark = activitiesMark;
 	}
 	public int getOralPracticalMark() {
 		return oralPracticalMark;
 	}
-	public void setOralPracticalMark(int oralPracticalMark) {
-		this.oralPracticalMark = oralPracticalMark;
+	public void setOralPracticalMark(int oralPracticalMark)throws InvalidStudentMarksException {
+		if(oralPracticalMark<0 && oralPracticalMark>10)
+			throw new InvalidStudentMarksException(InvalidStudentMarksException.INVALID_STUDENT_ORAL_PRACTICAL_MARK);
+		else
+			this.oralPracticalMark = oralPracticalMark;
 	}
 	public int getMidtermMark() {
 		return midtermMark;
 	}
-	public void setMidtermMark(int midtermMark) {
-		this.midtermMark = midtermMark;
+	public void setMidtermMark(int midtermMark)throws InvalidStudentMarksException {
+		if(midtermMark<0 && midtermMark>20)
+			throw new InvalidStudentMarksException(InvalidStudentMarksException.INVALID_STUDENT_MIDTERM_MARK);
+		else
+			this.midtermMark = midtermMark;
 	}
 	public int getFinalMark() {
 		return finalMark;
 	}
-	public void setFinalMark(int finalMark) {
-		this.finalMark = finalMark;
+	public void setFinalMark(int finalMark) throws InvalidStudentMarksException{
+		if(finalMark<0 && finalMark>60)
+			throw new InvalidStudentMarksException(InvalidStudentMarksException.INVALID_STUDENT_FINAL_MARK);
+		else
+			this.finalMark = finalMark;		
 	}
 	public int getTotalMark() {
 		return totalMark;
 	}
-	public void setTotalMark(int totalMark) {
-		this.totalMark = totalMark;
+	public void setTotalMark(int totalMark)throws InvalidStudentMarksException {
+		if(totalMark<0 && totalMark>100)
+			throw new InvalidStudentMarksException(InvalidStudentMarksException.INVALID_STUDENT_TOTOAL_MARK);
+		else
+			this.totalMark = totalMark;
 	}
 	public String getGrade() {
 		return grade;
