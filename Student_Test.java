@@ -3,10 +3,17 @@ import Exceptions.InvalidStudentMarksException;
 import Exceptions.InvalidStudentNameException;
 
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import program.Student;
 
+
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.InputMismatchException;
+import java.util.Locale;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,6 +52,20 @@ class Student_Test {
 	@Test
 	@Tag("unit")
 	@Tag("blackbox")
+	void Test_SetName_NameIsAnIntegerValue() {
+		String expected = "12";
+		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class, () -> {
+			student.setName(expected);
+		});
+		String expectedMessage = InvalidStudentNameException.INVALID_STUDENT_NAME_ALPHABETS;
+		String actualMessage = exception.getMessage();
+		assertThat(actualMessage).contains(expectedMessage);
+	}
+
+
+	@Test
+	@Tag("unit")
+	@Tag("blackbox")
 	void Test_SetName_NameStartsWithSpace_ExceptionThrown()
 	{
 
@@ -56,6 +77,7 @@ class Student_Test {
 		    String actualMessage = exception.getMessage();
         	assertThat(actualMessage).contains(expectedMessage);
 	}
+
 
 	@Test
 	@Tag("unit")
@@ -156,7 +178,7 @@ class Student_Test {
 	void Test_SetId_IdDoesNotContainAnyNumber_ExceptionThrown()
 	{
 		InvalidStudentIdException exception = assertThrows(InvalidStudentIdException.class, () -> student.setId("abcdefgh"));
-		String expectedMessage = InvalidStudentIdException.INVALID_STUDENT_ID_ALPHANUMERIC;
+		String expectedMessage = InvalidStudentIdException.INVALID_STUDENT_ID_DOES_NOT_START_WITH_NUMBERS;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
 	}
@@ -177,7 +199,8 @@ class Student_Test {
 	@Tag("blackbox")
 	void Test_SetId_IdIsEmpty_ExceptionThrown()
 	{
-		InvalidStudentIdException exception = assertThrows(InvalidStudentIdException.class, () -> student.setId(""));
+		InvalidStudentIdException exception = assertThrows(InvalidStudentIdException.class, () ->
+				student.setId(""));
 		String expectedMessage = InvalidStudentIdException.INVALID_STUDENT_ID_INVALID_LENGTH;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -186,8 +209,8 @@ class Student_Test {
 	@Test
 	@Tag("unit")
 	@Tag("blackbox")
-	@Tag("boundary")
-	void Test_setActivitiesMarkNormalValue_PositiveTesting()
+	@Tag("BVA_strategy")
+	void Test_setActivitiesMark_NormalValue_PositiveTesting()
 	{
 		int expected = 5;
 		try {
@@ -202,8 +225,8 @@ class Student_Test {
 	@Test
 	@Tag("unit")
 	@Tag("blackbox")
-	@Tag("boundary")
-	void Test_setActivitiesMarkLowerBoundValue_PositiveTesting()
+	@Tag("BVA_strategy")
+	void Test_setActivitiesMark_LowerBoundValue_PositiveTesting()
 	{
 		int expected = 0;
 		try {
@@ -218,8 +241,8 @@ class Student_Test {
 	@Test
 	@Tag("unit")
 	@Tag("blackbox")
-	@Tag("boundary")
-	void Test_setActivitiesMarkUpperBoundValue_PositiveTesting()
+	@Tag("BVA_strategy")
+	void Test_setActivitiesMark_UpperBoundValue_PositiveTesting()
 	{
 		int expected = 10;
 		try {
@@ -234,53 +257,133 @@ class Student_Test {
 	@Test
 	@Tag("unit")
 	@Tag("blackbox")
-	@Tag("boundary")
-	void Test_setActivitiesMarkOutLowerBoundValue_ExceptionThrown()
+	@Tag("BVA_strategy")
+	void Test_setActivitiesMark_OutLowerBoundValue_ExceptionThrown()
 	{
-		InvalidStudentMarksException exception = assertThrows(InvalidStudentMarksException.class, () ->
-				student.setActivitiesMark(-1));
-		String expectedMessage = InvalidStudentMarksException.INVALID_STUDENT_ACTIVITIES_MARK;
-		String actualMessage = exception.getMessage();
-		assertThat(actualMessage).contains(expectedMessage);
+		assertThrows(InvalidStudentMarksException.class, () -> student.setActivitiesMark(-1));
 	}
 
 	@Test
 	@Tag("unit")
 	@Tag("blackbox")
-	@Tag("boundary")
-	void Test_setActivitiesMarkOutUpperBoundValue_ExceptionThrown()
+	@Tag("BVA_strategy")
+	void Test_setActivitiesMark_OutUpperBoundValue_ExceptionThrown()
 	{
-		InvalidStudentMarksException exception = assertThrows(InvalidStudentMarksException.class, () ->
-				student.setActivitiesMark(11));
-		String expectedMessage = InvalidStudentMarksException.INVALID_STUDENT_ACTIVITIES_MARK;
-		String actualMessage = exception.getMessage();
-		assertThat(actualMessage).contains(expectedMessage);
+		assertThrows(InvalidStudentMarksException.class, () -> student.setActivitiesMark(11));
 	}
 
-	@Test
+
 	@Tag("unit")
 	@Tag("blackbox")
-	void Test_setActivitiesMarkEmptyValue_ExceptionThrown()
+	@Tag("BVA_strategy")
+	@ParameterizedTest
+	@ValueSource(ints = {0, 5, 10})
+	void Test_setOralPracticalMark_positiveTesting(int oralPracticalMark)
 	{
-		Integer value = null;
-		InvalidStudentMarksException exception = assertThrows(InvalidStudentMarksException.class, () ->
-				student.setActivitiesMark(value));
-		String expectedMessage = InvalidStudentMarksException.INVALID_STUDENT_ACTIVITIES_MARK;
-		String actualMessage = exception.getMessage();
-		assertThat(actualMessage).contains(expectedMessage);
+		try {
+			student.setOralPracticalMark(oralPracticalMark);
+		} catch (InvalidStudentMarksException e) {
+			e.printStackTrace();
+		}
+		int actual = student.getOralPracticalMark();
+		int expected = oralPracticalMark;
+		assertThat(actual).isEqualTo(expected);
 	}
 
-	@Test
 	@Tag("unit")
 	@Tag("blackbox")
-	void Test_setActivitiesMarkFloatValue_ExceptionThrown()
+	@Tag("BVA_strategy")
+	@ParameterizedTest
+	@ValueSource(ints = {-1, 11})
+	void Test_setOralPracticalMark_EnterValuesOutOfBounds_ExceptionThrown(int oralPracticalMark)
 	{
-		double value = 5.5;
-		InvalidStudentMarksException exception = assertThrows(InvalidStudentMarksException.class, () ->
-				student.setActivitiesMark(value));
-		String expectedMessage = InvalidStudentMarksException.INVALID_STUDENT_ACTIVITIES_MARK;
-		String actualMessage = exception.getMessage();
-		assertThat(actualMessage).contains(expectedMessage);
+		assertThrows(InvalidStudentMarksException.class, () ->
+				student.setOralPracticalMark(oralPracticalMark));
+	}
+
+	@Tag("unit")
+	@Tag("blackbox")
+	@Tag("BVA_strategy")
+	@ParameterizedTest
+	@ValueSource(ints = {0, 10, 20})
+	void Test_setMidtermMark_positiveTesting(int midtermMark)
+	{
+		try {
+			student.setMidtermMark(midtermMark);
+		} catch (InvalidStudentMarksException e) {
+			e.printStackTrace();
+		}
+		int actual = student.getMidtermMark();
+		int expected = midtermMark;
+		assertThat(actual).isEqualTo(expected);
+	}
+
+
+	@Tag("unit")
+	@Tag("blackbox")
+	@Tag("BVA_strategy")
+	@ParameterizedTest
+	@ValueSource(ints = {-1, 21})
+	void Test_setMidtermMark_EnterValuesOutOfBounds_ExceptionThrown(int midtermMark)
+	{
+		assertThrows(InvalidStudentMarksException.class, ()->student.setMidtermMark(midtermMark));
+	}
+
+
+	@Tag("unit")
+	@Tag("blackbox")
+	@Tag("BVA_strategy")
+	@ParameterizedTest
+	@ValueSource(ints = {0, 30, 60})
+	void Test_setFinalMark_positiveTesting(int finalMark)
+	{
+		try {
+			student.setFinalMark(finalMark);
+		} catch (InvalidStudentMarksException e) {
+			e.printStackTrace();
+		}
+		int actual = student.getFinalMark();
+		int expected = finalMark;
+		assertThat(actual).isEqualTo(expected);
+	}
+
+	@Tag("unit")
+	@Tag("blackbox")
+	@Tag("BVA_strategy")
+	@ParameterizedTest
+	@ValueSource(ints = {-1, 61})
+	void Test_setFinalMark_EnterValuesOutOfBounds_ExceptionThrown(int finalMark)
+	{
+		assertThrows(InvalidStudentMarksException.class, ()->student.setMidtermMark(finalMark));
+	}
+
+
+	@Tag("unit")
+	@Tag("blackbox")
+	@Tag("BVA_strategy")
+	@ParameterizedTest
+	@ValueSource(ints = {0, 50, 100})
+	void Test_setTotalMark_positiveTesting(int totalMark)
+	{
+		try {
+			student.setTotalMark(totalMark);
+		} catch (InvalidStudentMarksException e) {
+			e.printStackTrace();
+		}
+		int actual = student.getTotalMark();
+		int expected = totalMark;
+		assertThat(actual).isEqualTo(expected);
+	}
+
+
+	@Tag("unit")
+	@Tag("blackbox")
+	@Tag("BVA_strategy")
+	@ParameterizedTest
+	@ValueSource(ints = {-1, 101})
+	void Test_setTotalMark_EnterValuesOutOfBounds_ExceptionThrown(int totalMark)
+	{
+		assertThrows(InvalidStudentMarksException.class, ()->student.setMidtermMark(totalMark));
 	}
 
 }
