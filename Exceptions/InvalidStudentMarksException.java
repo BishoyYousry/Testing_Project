@@ -8,7 +8,7 @@ public class InvalidStudentMarksException extends Exception {
 	public static final String INVALID_STUDENT_ORAL_PRACTICAL_MARK = "Student oral practical mark range must be between 0 to 10";
 	public static final String INVALID_STUDENT_MIDTERM_MARK = "Student activities range must be between 0 to 20";
 	public static final String INVALID_STUDENT_FINAL_MARK = "Student activities range must be between 0 to 60";
-	public static final String INVALID_STUDENT_TOTOAL_MARK = "Student activities range must be between 0 to 100";
+	public static final String INVALID_STUDENT_TOTAL_MARK = "Student activities range must be between 0 to 100";
 	
 	public InvalidStudentMarksException(){
 		super();

@@ -10,7 +10,7 @@ public class Calculator {
      * Output: Total Student Marks: int
      * 
      */
-    public static int compute_total_mark(int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark){
+    public static double compute_total_mark(double activitiesMark, int oralPracticalMark, int midtermMark, int finalMark){
         return (activitiesMark+oralPracticalMark+midtermMark+finalMark);
     }
 
@@ -22,7 +22,7 @@ public class Calculator {
      * Output: Student Grade: String
      * 
      */    
-    public static String compute_Grade(int mark){
+    public static String compute_Grade(double mark){
 		String Grade;
 		if(mark >= 97)
 			Grade = "A+";

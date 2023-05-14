@@ -4,11 +4,11 @@ import Exceptions.*;
 public class Student {
 	private String name;
 	private String id;
-	private int activitiesMark;
+	private double activitiesMark;
 	private int oralPracticalMark;
 	private int midtermMark;
 	private int finalMark;
-	private int totalMark;
+	private double totalMark;
 	private String grade;
 	private String gpa;
 	
@@ -86,26 +86,25 @@ public class Student {
 	 * @Inputs: Student id
 	 * 
 	 * @Description: Set the student id if the following conditions are achieved:
-	 *  			1- Student Id must be alphanumeric characters
-	 *  			2- Student Id length = 8 chars
-	 *  			3- Student Id should start with numbers, and might end with only one alphabetic character
+	 *  			1- 8 (numeric characters) or (7 numeric characters +1 alphabetic char)(12345678 or 1234567D)
+	 *  			2- Student id should start with numbers, and might end with only one alphabetic character
 	 * */
 	
 	public void setId(String id) throws InvalidStudentIdException {
 		if(id.length()!= 8)
-			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_INVLID_LENGTH);
+			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_INVALID_LENGTH);
 		else if(id.charAt(0)<'0'&&id.charAt(0)>'9')
-			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_DOESNOT_START_WITH_NUMBERS );
+			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_DOES_NOT_START_WITH_NUMBERS );
 		else if((id.charAt(7)<'0'&&id.charAt(7)>'9')||(id.charAt(7)<'a'&&id.charAt(7)>'z')||(id.charAt(7)<'A'&&id.charAt(7)>'Z'))
 			throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_ALPHANUMERIC );
 		else
 			this.id = id;
 	}
 	
-	public int getActivitiesMark(){
+	public double getActivitiesMark(){
 		return activitiesMark;
 	}
-	public void setActivitiesMark(int activitiesMark) throws InvalidStudentMarksException{
+	public void setActivitiesMark(double activitiesMark) throws InvalidStudentMarksException{
 		if(activitiesMark<0 && activitiesMark>10)
 			throw new InvalidStudentMarksException(InvalidStudentMarksException.INVALID_STUDENT_ACTIVITIES_MARK);
 		else
@@ -138,12 +137,12 @@ public class Student {
 		else
 			this.finalMark = finalMark;		
 	}
-	public int getTotalMark() {
+	public double getTotalMark() {
 		return totalMark;
 	}
-	public void setTotalMark(int totalMark)throws InvalidStudentMarksException {
+	public void setTotalMark(double totalMark)throws InvalidStudentMarksException {
 		if(totalMark<0 && totalMark>100)
-			throw new InvalidStudentMarksException(InvalidStudentMarksException.INVALID_STUDENT_TOTOAL_MARK);
+			throw new InvalidStudentMarksException(InvalidStudentMarksException.INVALID_STUDENT_TOTAL_MARK);
 		else
 			this.totalMark = totalMark;
 	}
