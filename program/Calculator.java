@@ -73,7 +73,7 @@ public class Calculator {
 			GPA = "1.7";
 		else if(Grade == "C")
 			GPA = "2";
-		else if(Grade == " C+")
+		else if(Grade == "C+")
 			GPA = "2.3";
 		else if(Grade == "B-")
 			GPA = "2.7";
