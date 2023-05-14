@@ -1,14 +1,17 @@
 package program;
-import Exceptions.*; 
+import Exceptions.*;
+
+import java.util.Scanner;
 
 public class Student {
+
 	private String name;
 	private String id;
-	private double activitiesMark;
+	private int activitiesMark;
 	private int oralPracticalMark;
 	private int midtermMark;
 	private int finalMark;
-	private double totalMark;
+	private int totalMark;
 	private String grade;
 	private String gpa;
 	
@@ -103,10 +106,10 @@ public class Student {
 			this.id = id;
 	}
 	
-	public double getActivitiesMark(){
+	public int getActivitiesMark(){
 		return activitiesMark;
 	}
-	public void setActivitiesMark(double activitiesMark) throws InvalidStudentMarksException{
+	public void setActivitiesMark(int activitiesMark) throws InvalidStudentMarksException{
 		if (activitiesMark<0 || activitiesMark>10)
 			throw new InvalidStudentMarksException(InvalidStudentMarksException.INVALID_STUDENT_ACTIVITIES_MARK);
 		else
@@ -139,10 +142,10 @@ public class Student {
 		else
 			this.finalMark = finalMark;		
 	}
-	public double getTotalMark() {
+	public int getTotalMark() {
 		return totalMark;
 	}
-	public void setTotalMark(double totalMark)throws InvalidStudentMarksException {
+	public void setTotalMark(int totalMark)throws InvalidStudentMarksException {
 		if(totalMark<0 || totalMark>100)
 			throw new InvalidStudentMarksException(InvalidStudentMarksException.INVALID_STUDENT_TOTAL_MARK);
 		else
