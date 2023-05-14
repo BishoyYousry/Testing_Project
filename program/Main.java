@@ -1,16 +1,16 @@
 package program;
 
-import Exceptions.InvalidStudentNameException;
+import Exceptions.InvalidStudentMarksException;
 
 public class Main {
 	public static void main(String args[])
 	{
 		Student student = new Student();
+		Integer value = null;
 		try {
-			student.setName(" Bishoy Yousry");
-		} catch (InvalidStudentNameException e) {			
-			System.out.println(e);
+			student.setActivitiesMark(value);
+		} catch (InvalidStudentMarksException e) {
+			e.printStackTrace();
 		}
-		System.out.println(student.getName());
 	}
 }
