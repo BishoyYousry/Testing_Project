@@ -206,4 +206,172 @@ public class Calculator_Test
 
         assertThat(actualValue).isEqualTo(expectedValue);
     }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeAPlus_Gpa4()
+    {
+        String grade = "A+";
+
+        String expectedValue = "4";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeA_Gpa4()
+    {
+        String grade = "A";
+
+        String expectedValue = "4";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeAMinus_Gpa3_7()
+    {
+        String grade = "A-";
+
+        String expectedValue = "3.7";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeBPlus_Gpa3_3()
+    {
+        String grade = "B+";
+
+        String expectedValue = "3.3";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeB_Gpa3()
+    {
+        String grade = "B";
+
+        String expectedValue = "3";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeBMinus_Gpa2_7()
+    {
+        String grade = "B-";
+
+        String expectedValue = "2.7";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeCPlus_Gpa2_3()
+    {
+        String grade = "C+";
+
+        String expectedValue = "2.3";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeC_Gpa2()
+    {
+        String grade = "C";
+
+        String expectedValue = "2";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeCMinus_Gpa1_7()
+    {
+        String grade = "C-";
+
+        String expectedValue = "1.7";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeDPlus_Gpa1_3()
+    {
+        String grade = "D+";
+
+        String expectedValue = "1.3";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeD_Gpa1()
+    {
+        String grade = "D";
+
+        String expectedValue = "1";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_compute_GPA_gradeF_Gpa0()
+    {
+        String grade = "F";
+
+        String expectedValue = "0";
+
+        String actualValue = compute_GPA(grade);
+
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
 }
