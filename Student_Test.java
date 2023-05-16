@@ -1,28 +1,22 @@
 import Exceptions.InvalidStudentIdException;
 import Exceptions.InvalidStudentMarksException;
 import Exceptions.InvalidStudentNameException;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import program.Student;
 
-
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.InputMismatchException;
-import java.util.Locale;
-import java.util.Scanner;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
+@SuppressWarnings("NewClassNamingConvention")
 class Student_Test {
 
 	private final Student student = new Student();
@@ -42,7 +36,7 @@ class Student_Test {
 		try {
 		student.setName("Bishoy Yousry");
 		}catch(InvalidStudentNameException e){
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		String expected = "Bishoy Yousry";
 		assertThat(student.getName()).isEqualTo(expected);
@@ -54,9 +48,7 @@ class Student_Test {
 	@Tag("blackbox")
 	void Test_SetName_NameIsAnIntegerValue() {
 		String expected = "12";
-		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class, () -> {
-			student.setName(expected);
-		});
+		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class, () -> student.setName(expected));
 		String expectedMessage = InvalidStudentNameException.INVALID_STUDENT_NAME_ALPHABETS;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -85,9 +77,7 @@ class Student_Test {
 	void Test_SetName_NameIsEmpty_ExceptionThrown()
 	{
 
-		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class, () -> {
-			student.setName("");
-		});
+		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class, () -> student.setName(""));
 
 		String expectedMessage = InvalidStudentNameException.INVALID_STUDENT_NAME_ALPHABETS;
 		String actualMessage = exception.getMessage();
@@ -286,8 +276,7 @@ class Student_Test {
 			e.printStackTrace();
 		}
 		int actual = student.getOralPracticalMark();
-		int expected = oralPracticalMark;
-		assertThat(actual).isEqualTo(expected);
+		assertThat(actual).isEqualTo(oralPracticalMark);
 	}
 
 	@Tag("unit")
@@ -314,8 +303,7 @@ class Student_Test {
 			e.printStackTrace();
 		}
 		int actual = student.getMidtermMark();
-		int expected = midtermMark;
-		assertThat(actual).isEqualTo(expected);
+		assertThat(actual).isEqualTo(midtermMark);
 	}
 
 
@@ -343,8 +331,7 @@ class Student_Test {
 			e.printStackTrace();
 		}
 		int actual = student.getFinalMark();
-		int expected = finalMark;
-		assertThat(actual).isEqualTo(expected);
+		assertThat(actual).isEqualTo(finalMark);
 	}
 
 	@Tag("unit")
@@ -371,8 +358,7 @@ class Student_Test {
 			e.printStackTrace();
 		}
 		int actual = student.getTotalMark();
-		int expected = totalMark;
-		assertThat(actual).isEqualTo(expected);
+		assertThat(actual).isEqualTo(totalMark);
 	}
 
 
