@@ -1,9 +1,8 @@
 import Exceptions.InvalidStudentIdException;
 import Exceptions.InvalidStudentMarksException;
 import Exceptions.InvalidStudentNameException;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import program.Student;
@@ -11,12 +10,14 @@ import program.Student;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-@SuppressWarnings("NewClassNamingConvention")
 class Student_Test {
 
 	private final Student student = new Student();
@@ -27,6 +28,91 @@ class Student_Test {
 	{
 	    System.setOut(new PrintStream(outputStreamCaptor));
 	}
+
+
+	@Test
+	@Tag("unit")
+	@Tag("blackbox")
+	void Test_Student_TestConstructor1PositiveTesting() {
+
+		Student student1 = null;
+		try {
+			student1 = new Student("Dalia Assad", "1900688s", "A+", "4");
+		} catch (InvalidStudentIdException | InvalidStudentNameException e) {
+			e.printStackTrace();
+		}
+		assert student1 != null;
+		assertThat(student1.getName()).isEqualTo("Dalia Assad");
+		assertThat(student1.getId()).isEqualTo("1900688s");
+		assertThat(student1.getGrade()).isEqualTo("A+");
+		assertThat(student1.getGpa()).isEqualTo("4");
+	}
+
+	@Test
+	@Tag("unit")
+	@Tag("blackbox")
+	void Test_Student_TestConstructor1EnterInvalidNameAndId_MustThrowTwoExceptions() {
+		try {
+			new Student("Dalia", "1900688", "A+", "4");
+		} catch (InvalidStudentIdException e) {
+			String actualMessage2 = e.getMessage();
+			String expectedMessage2 = InvalidStudentIdException.INVALID_STUDENT_ID_INVALID_LENGTH;
+			assertThat(expectedMessage2).isEqualTo(actualMessage2);
+		} catch (InvalidStudentNameException e) {
+			String expectedMessage1 = InvalidStudentNameException.INVALID_STUDENT_NAME_ONE_SPACE;
+			String actualMessage1 = e.getMessage();
+			assertThat(expectedMessage1).isEqualTo(actualMessage1);
+		}
+
+
+	}
+
+
+	@Test
+	@Tag("unit")
+	@Tag("blackbox")
+	void Test_Student_TestConstructor2PositiveTesting() {
+		Student student1 = null;
+		try {
+			student1 = new Student("Dalia Assad", "1900688s", 5, 0, 20, 60, 1);
+		} catch (InvalidStudentNameException | InvalidStudentMarksException | InvalidStudentIdException e) {
+			e.printStackTrace();
+		}
+		assert student1 != null;
+		assertThat(student1.getName()).isEqualTo("Dalia Assad");
+		assertThat(student1.getId()).isEqualTo("1900688s");
+		assertThat(student1.getActivitiesMark()).isEqualTo(5);
+		assertThat(student1.getOralPracticalMark()).isEqualTo(0);
+		assertThat(student1.getMidtermMark()).isEqualTo(20);
+		assertThat(student1.getFinalMark()).isEqualTo(60);
+		assertThat(student1.getTotalMark()).isEqualTo(1);
+	}
+
+
+
+	@Test
+	@Tag("unit")
+	@Tag("blackbox")
+	void Test_Student_TestConstructor2EnterInvalidName_Id_Midterm_FinalMarks_ThrowExceptions() {
+		try {
+			new Student(" Mido ", "?@", 5, 0, -1, 61, 100);
+		} catch (InvalidStudentNameException e) {
+			String actualMessage = e.getMessage();
+			String expectedMessage = InvalidStudentNameException.INVALID_STUDENT_NAME_STARTS_WITH_SPACE;
+			assertThat(actualMessage).isEqualTo(expectedMessage);
+		} catch (InvalidStudentIdException e) {
+			String actualMessage = e.getMessage();
+			String expectedMessage = InvalidStudentIdException.INVALID_STUDENT_ID_DOES_NOT_START_WITH_NUMBERS;
+			assertThat(actualMessage).isEqualTo(expectedMessage);
+		} catch (InvalidStudentMarksException e) {
+			String actualMessage = e.getMessage();
+			String expectedMessage = InvalidStudentMarksException.INVALID_STUDENT_MIDTERM_MARK;
+			assertThat(actualMessage).isEqualTo(expectedMessage);
+		}
+
+	}
+
+
 
 
 	@Test
@@ -48,7 +134,8 @@ class Student_Test {
 	@Tag("blackbox")
 	void Test_SetName_NameIsAnIntegerValue() {
 		String expected = "12";
-		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class, () -> student.setName(expected));
+		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class, () ->
+			student.setName(expected));
 		String expectedMessage = InvalidStudentNameException.INVALID_STUDENT_NAME_ALPHABETS;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -60,7 +147,6 @@ class Student_Test {
 	@Tag("blackbox")
 	void Test_SetName_NameStartsWithSpace_ExceptionThrown()
 	{
-
 		 InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class, () -> {
 			 student.setName(" Bishoy Yousry");	// The name starts with a space
 		 });
@@ -77,7 +163,8 @@ class Student_Test {
 	void Test_SetName_NameIsEmpty_ExceptionThrown()
 	{
 
-		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class, () -> student.setName(""));
+		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class, () ->
+				student.setName(""));
 
 		String expectedMessage = InvalidStudentNameException.INVALID_STUDENT_NAME_ALPHABETS;
 		String actualMessage = exception.getMessage();
@@ -208,7 +295,7 @@ class Student_Test {
 		} catch (InvalidStudentMarksException e) {
 			e.printStackTrace();
 		}
-		double actual = student.getActivitiesMark();
+		int actual = student.getActivitiesMark();
 		assertThat(expected).isEqualTo(actual);
 	}
 
@@ -224,7 +311,7 @@ class Student_Test {
 		} catch (InvalidStudentMarksException e) {
 			e.printStackTrace();
 		}
-		double actual = student.getActivitiesMark();
+		int actual = student.getActivitiesMark();
 		assertThat(expected).isEqualTo(actual);
 	}
 
@@ -240,7 +327,7 @@ class Student_Test {
 		} catch (InvalidStudentMarksException e) {
 			e.printStackTrace();
 		}
-		double actual = student.getActivitiesMark();
+		int actual = student.getActivitiesMark();
 		assertThat(expected).isEqualTo(actual);
 	}
 
