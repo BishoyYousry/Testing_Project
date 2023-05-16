@@ -1,8 +1,6 @@
 package program;
 import Exceptions.*;
 
-import java.util.Scanner;
-
 public class Student {
 
 	private String name;
@@ -20,24 +18,26 @@ public class Student {
 		super();
 	}
 	
-	public Student(String name, String id, String grade, String gpa) {
+	public Student(String name, String id, String grade, String gpa) throws InvalidStudentIdException,
+			InvalidStudentNameException {
 		super();
-		this.name = name;
-		this.id = id;
-		this.grade = grade;
-		this.gpa = gpa;
+		this.setName(name);
+		this.setId(id);
+		this.setGrade(grade);
+		this.setGpa(gpa);
 	}
 
 	public Student(String name, String id, int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark,
-			int totalMark) {
+			int totalMark) throws InvalidStudentNameException, InvalidStudentIdException,
+			InvalidStudentMarksException {
 		super();
-		this.name = name;
-		this.id = id;
-		this.activitiesMark = activitiesMark;
-		this.oralPracticalMark = oralPracticalMark;
-		this.midtermMark = midtermMark;
-		this.finalMark = finalMark;
-		this.totalMark = totalMark;
+		this.setName(name);
+		this.setId(id);
+		this.setActivitiesMark(activitiesMark);
+		this.setOralPracticalMark(oralPracticalMark);
+		this.setMidtermMark(midtermMark);
+		this.setFinalMark(finalMark);
+		this.setTotalMark(totalMark);
 	}
 
 	public Student(String name, String id, int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark,
