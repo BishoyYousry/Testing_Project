@@ -1,6 +1,5 @@
 import Exceptions.InvalidCourseCodeException;
 import Exceptions.InvalidCourseNameException;
-import Exceptions.InvalidStudentNameException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -17,6 +16,14 @@ class Course_Test
 {
 
 	private final Course course = new Course();
+
+	/*
+	 ************************************************************
+	 ************************************************************
+	 * The following Test cases are related to BlackBox Testing
+	 ************************************************************
+	 ************************************************************
+	 */
 
 	@Test
 	@Tag("unit")
@@ -428,6 +435,14 @@ class Course_Test
 	}
 
 
+	/*
+	 ************************************************************
+	 ************************************************************
+	 * The following Test cases are related to WhiteBox Testing
+	 ************************************************************
+	 ************************************************************
+	 */
+
 	@ParameterizedTest
 	@ValueSource(strings = {"$Embedded Systems", "+SW dev", "Data12 Base", "M_ ", "Mr. DB"})
 	@Tag("whitebox")
@@ -464,6 +479,65 @@ class Course_Test
 				()->course.setName("DataBase"));
 		String actualMessage = exception.getMessage();
 		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ONE_SPACE;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {" ", "ABCDE", "ABCDEFGH"})
+	@Tag("whitebox")
+	@Tag("conditional_coverage")
+	@DisplayName("Test the first condition in setCode function that is related to the length of" +
+			"the code which must be 6 or 7")
+	void Test_setCode_EnterCodeToTestTheFirstCondition_ExceptionThrown(String code)
+	{
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class,
+				()->course.setCode(code));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+
+	@ParameterizedTest
+	@ValueSource(strings = {"CSE12_", "123CSE", "CSEABC"})
+	@Tag("whitebox")
+	@Tag("conditional_coverage")
+	@DisplayName("Test the second condition in setCode function. To pass it must has 3chars + 3 no.")
+	void Test_setCode_EnterCodeToTestTheSecondCondition_ExceptionThrown(String code)
+	{
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class,
+				()->course.setCode(code));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"CSE123_", "123CSEs", "      s"})
+	@Tag("whitebox")
+	@Tag("conditional_coverage")
+	@DisplayName("Test the third condition in setCode function. To pass it must has 3chars + 3 no. + 1 char")
+	void Test_setCode_EnterCodeToTestTheThirdCondition_ExceptionThrown(String code)
+	{
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class,
+				()->course.setCode(code));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+
+	@ParameterizedTest
+	@ValueSource(strings = {"CSE123h", "cse950S"})
+	@Tag("whitebox")
+	@Tag("conditional_coverage")
+	@DisplayName("Test the fourth condition in setCode function. the 7th char must be 's'")
+	void Test_setCode_EnterCodeToTestTheFourthCondition_ExceptionThrown(String code)
+	{
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class,
+				()->course.setCode(code));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_LAST_CHAR;
 		assertThat(actualMessage).isEqualTo(expectedMessage);
 	}
 
