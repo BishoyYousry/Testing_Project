@@ -27,7 +27,7 @@ public class Course {
 		return name;
 	}
 	public void setName(String name) throws InvalidCourseNameException{
-		if(!name.matches("[a-zA-Z ]+"))
+		if(!name.matches("^[a-zA-Z ]+$"))
 			throw new InvalidCourseNameException(InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC);	
 		else if(name.charAt(0) == ' ')
 			throw new InvalidCourseNameException(InvalidCourseNameException.INVALID_COURSE_NAME_START_WITH_SPACE);	
@@ -38,10 +38,14 @@ public class Course {
 		return code;
 	}
 	public void setCode(String code) throws InvalidCourseCodeException{
-		if(!code.matches("[a-zA-Z]{3}\\d{3}|[a-zA-Z]{3}\\d{3}[a-zA-Z]"))
+		if(code.length() != 6 &&code.length() != 7)
+			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);
+		else if(code.length() == 6 && !(code.matches("^[a-zA-Z]{3}[0-9]{3}$")))
 			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);	
-		else if(code.length() == 7 && code.charAt(6) != 's')
-			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_LAST_CHAR);	
+		else if(code.length() == 7 && !(code.matches("^[a-zA-Z]{3}[0-9]{3}[a-zA-Z]{1}$")))
+			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);
+		else if(code.length() == 7 && code.charAt(6)!= 's')
+			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_LAST_CHAR);
 		else
 			this.code = code;
 	}
