@@ -14,9 +14,7 @@ public class Student {
 	private String gpa;
 	
 	
-	public Student() {
-		super();
-	}
+	public Student() {}
 
 	public Student(String name, String id, String grade, String gpa) throws InvalidStudentIdException,
 			InvalidStudentNameException {
