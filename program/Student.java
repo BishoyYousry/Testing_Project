@@ -20,36 +20,39 @@ public class Student {
 		super();
 	}
 	
-	public Student(String name, String id, String grade, String gpa) {
+	public Student(String name, String id, String grade, String gpa) throws  InvalidStudentIdException,
+	InvalidStudentMarksException,InvalidStudentNameException {
 		super();
-		this.name = name;
-		this.id = id;
+		this.setName(name);
+		this.setId(id);
 		this.grade = grade;
 		this.gpa = gpa;
 	}
 
-	public Student(String name, String id, int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark,
-			int totalMark) {
+	public Student(String name, String id, int activitiesMark, int oralPracticalMark, int midtermMark,
+			int finalMark,int totalMark) throws  InvalidStudentIdException,InvalidStudentMarksException,
+	InvalidStudentNameException{
 		super();
-		this.name = name;
-		this.id = id;
-		this.activitiesMark = activitiesMark;
-		this.oralPracticalMark = oralPracticalMark;
-		this.midtermMark = midtermMark;
-		this.finalMark = finalMark;
-		this.totalMark = totalMark;
+		this.setName(name);
+		this.setId(id);
+		this.setActivitiesMark(activitiesMark);
+		this.setOralPracticalMark(oralPracticalMark);
+		this.setMidtermMark(midtermMark);
+		this.setFinalMark(finalMark);
+		this.setTotalMark(totalMark);
 	}
 
-	public Student(String name, String id, int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark,
-			int totalMark, String grade, String gpa) {
+	public Student(String name, String id, int activitiesMark, int oralPracticalMark,
+			int midtermMark, int finalMark,int totalMark, String grade, String gpa)
+		throws  InvalidStudentIdException,InvalidStudentMarksException,InvalidStudentNameException{
 		super();
-		this.name = name;
-		this.id = id;
-		this.activitiesMark = activitiesMark;
-		this.oralPracticalMark = oralPracticalMark;
-		this.midtermMark = midtermMark;
-		this.finalMark = finalMark;
-		this.totalMark = totalMark;
+		this.setName(name);
+		this.setId(id);
+		this.setActivitiesMark(activitiesMark);
+		this.setOralPracticalMark(oralPracticalMark);
+		this.setMidtermMark(midtermMark);
+		this.setFinalMark(finalMark);
+		this.setTotalMark(totalMark);
 		this.grade = grade;
 		this.gpa = gpa;
 	}
@@ -68,7 +71,7 @@ public class Student {
 	 * */
 	
 	public void setName(String name) throws InvalidStudentNameException{		
-		if(!name.matches("[a-zA-Z ]+"))
+		if(!name.matches("^[a-zA-Z ]+$"))
 			throw new InvalidStudentNameException(InvalidStudentNameException.INVALID_STUDENT_NAME_ALPHABETS);		
 		if(name.charAt(0) == ' ')
 			throw new InvalidStudentNameException(InvalidStudentNameException.INVALID_STUDENT_NAME_STARTS_WITH_SPACE);
