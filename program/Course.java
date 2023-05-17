@@ -17,9 +17,10 @@ public class Course {
 	}
 	
 	
-	public Course(String name, String code) {
-		this.name = name;
-		this.code = code;
+	public Course(String name, String code) throws  InvalidCourseNameException,InvalidCourseCodeException
+	{
+		this.setName(name);
+		this.setCode(code);
 	}
 
 
