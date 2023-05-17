@@ -17,8 +17,7 @@ public class Student {
 	public Student() {
 		super();
 	}
-	
-<<<<<<< HEAD
+
 	public Student(String name, String id, String grade, String gpa) throws InvalidStudentIdException,
 			InvalidStudentNameException {
 		super();
@@ -28,23 +27,10 @@ public class Student {
 		this.setGpa(gpa);
 	}
 
-	public Student(String name, String id, int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark,
-			int totalMark) throws InvalidStudentNameException, InvalidStudentIdException,
-			InvalidStudentMarksException {
-=======
-	public Student(String name, String id, String grade, String gpa) throws  InvalidStudentIdException,
-	InvalidStudentMarksException,InvalidStudentNameException {
-		super();
-		this.setName(name);
-		this.setId(id);
-		this.grade = grade;
-		this.gpa = gpa;
-	}
 
 	public Student(String name, String id, int activitiesMark, int oralPracticalMark, int midtermMark,
 			int finalMark,int totalMark) throws  InvalidStudentIdException,InvalidStudentMarksException,
 	InvalidStudentNameException{
->>>>>>> 3d84daa64808b7b7258557890d8452a44d9520cf
 		super();
 		this.setName(name);
 		this.setId(id);
@@ -55,20 +41,6 @@ public class Student {
 		this.setTotalMark(totalMark);
 	}
 
-	public Student(String name, String id, int activitiesMark, int oralPracticalMark,
-			int midtermMark, int finalMark,int totalMark, String grade, String gpa)
-		throws  InvalidStudentIdException,InvalidStudentMarksException,InvalidStudentNameException{
-		super();
-		this.setName(name);
-		this.setId(id);
-		this.setActivitiesMark(activitiesMark);
-		this.setOralPracticalMark(oralPracticalMark);
-		this.setMidtermMark(midtermMark);
-		this.setFinalMark(finalMark);
-		this.setTotalMark(totalMark);
-		this.grade = grade;
-		this.gpa = gpa;
-	}
 	public String getName() {		
 		return name;
 	}
