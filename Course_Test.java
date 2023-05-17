@@ -463,7 +463,7 @@ class Course_Test
 		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class,
 				()->course.setName("DataBase"));
 		String actualMessage = exception.getMessage();
-		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_START_WITH_SPACE;
+		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ONE_SPACE;
 		assertThat(actualMessage).isEqualTo(expectedMessage);
 	}
 
