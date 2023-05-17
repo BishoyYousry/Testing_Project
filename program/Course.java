@@ -20,12 +20,12 @@ public class Course {
 		return name;
 	}
 	public void setName(String name) throws InvalidCourseNameException{
-		if(name.charAt(0) == ' ')
-			throw new InvalidCourseNameException(InvalidCourseNameException.INVALID_COURSE_NAME_START_WITH_SPACE);	
-		else if(!name.matches("^[a-zA-Z ]+$"))
-			throw new InvalidCourseNameException(InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC);
+		if(!name.matches("^[a-zA-Z ]+$"))
+			throw new InvalidCourseNameException(InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC);	
+		else if(name.charAt(0) == ' ')
+			throw new InvalidCourseNameException(InvalidCourseNameException.INVALID_COURSE_NAME_START_WITH_SPACE);
 		else if(!name.contains(" "))
-			throw new InvalidCourseNameException(InvalidCourseNameException.INVALID_COURSE_NAME_NO_SPACE);
+			throw new InvalidCourseNameException(InvalidCourseNameException.INVALID_COURSE_NAME_ONE_SPACE);
 		else 
 			this.name = name;
 	}
