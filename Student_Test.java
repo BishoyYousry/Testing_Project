@@ -2,6 +2,7 @@ import Exceptions.InvalidStudentIdException;
 import Exceptions.InvalidStudentMarksException;
 import Exceptions.InvalidStudentNameException;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -28,6 +29,14 @@ class Student_Test {
 	{
 	    System.setOut(new PrintStream(outputStreamCaptor));
 	}
+
+	/*
+	 ************************************************************
+	 ************************************************************
+	 * The following Test cases are related to BlackBox Testing
+	 ************************************************************
+	 ************************************************************
+	 */
 
 
 	@Test
@@ -428,7 +437,7 @@ class Student_Test {
 	@ValueSource(ints = {-1, 61})
 	void Test_setFinalMark_EnterValuesOutOfBounds_ExceptionThrown(int finalMark)
 	{
-		assertThrows(InvalidStudentMarksException.class, ()->student.setMidtermMark(finalMark));
+		assertThrows(InvalidStudentMarksException.class, ()->student.setFinalMark(finalMark));
 	}
 
 
@@ -456,7 +465,99 @@ class Student_Test {
 	@ValueSource(ints = {-1, 101})
 	void Test_setTotalMark_EnterValuesOutOfBounds_ExceptionThrown(int totalMark)
 	{
-		assertThrows(InvalidStudentMarksException.class, ()->student.setMidtermMark(totalMark));
+		assertThrows(InvalidStudentMarksException.class, ()->student.setTotalMark(totalMark));
+	}
+
+
+
+	/*
+	 ************************************************************
+	 ************************************************************
+	 * The following Test cases are related to WhiteBox Testing
+	 ************************************************************
+	 ************************************************************
+	 */
+
+	@ParameterizedTest
+	@ValueSource(strings = {"$Ramy Lwiz", "+MrRamy", "Bishoy12 Yousry", "a_ ", "Mr. Mido"})
+	@Tag("whitebox")
+	@Tag("branch_coverage")
+	@DisplayName("Test case to fail the first condition that related to alphabets")
+	void Test_setName_EnterSomeTestCasesToFailTheFirstCondition_ExceptionThrown(String name)
+	{
+		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class,
+				()->student.setName(name));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidStudentNameException.INVALID_STUDENT_NAME_ALPHABETS;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+
+	@Test
+	@Tag("whitebox")
+	@Tag("branch_coverage")
+	void Test_setName_EnterNameThatStartsWithSpace_ExceptionThrown()
+	{
+		InvalidStudentNameException exception = assertThrows(InvalidStudentNameException.class,
+				()->student.setName(" Bosha"));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidStudentNameException.INVALID_STUDENT_NAME_STARTS_WITH_SPACE;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+
+	@ParameterizedTest
+	@Tag("whitebox")
+	@Tag("conditional_coverage")
+	@ValueSource(chars = {'0' - 1, '9' + 1})
+	@DisplayName("This test case is to test the second condition that related to the first number" +
+				 "it must to be [0:9]")
+	void Test_setId_EnterValuesToTestTheSecondCondition_ExceptionThrown(char c)
+	{
+		InvalidStudentIdException exception = assertThrows(InvalidStudentIdException.class, ()->
+				student.setId(c + "9007333"));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidStudentIdException.INVALID_STUDENT_ID_DOES_NOT_START_WITH_NUMBERS;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+
+	@ParameterizedTest
+	@Tag("whitebox")
+	@Tag("conditional_coverage")
+	@ValueSource(chars = {'`', 'a' - 1, 'z' + 1, 'A' - 1, 'Z' + 1, ' '})
+	@DisplayName("This test case is to test the third condition that related to the id must be alphanumeric")
+	void Test_setId_EnterValuesToTestTheThirdCondition_ExceptionThrown(char c)
+	{
+		InvalidStudentIdException exception = assertThrows(InvalidStudentIdException.class, ()->
+				student.setId("1900733" + c));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidStudentIdException.INVALID_STUDENT_ID_ALPHANUMERIC;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+
+	@ParameterizedTest
+	@Tag("whitebox")
+	@Tag("conditional_coverage")
+	@ValueSource(chars = {'`', 'a' - 1, 'z' + 1, 'A' - 1, 'Z' + 1, ' '})
+	@DisplayName("This test case is to test the fourth condition that related to each intermediate digit" +
+				 "if the condition was not true, it must throw INVALID_STUDENT_ID_GENERAL")
+	void Test_setId_EnterValuesToTestTheFourthCondition_ExceptionThrown(char c)
+	{
+		String idValue = "1900733s";
+		char [] charArray = idValue.toCharArray();
+		InvalidStudentIdException exception;
+		for (int i = 1; i <= 6; i++)
+		{
+			charArray[i] = c;
+			String newString = new String(charArray);
+			exception = assertThrows(InvalidStudentIdException.class, ()->
+					student.setId(newString));
+			String actualMessage = exception.getMessage();
+			String expectedMessage = InvalidStudentIdException.INVALID_STUDENT_ID_GENERAL;
+			assertThat(actualMessage).isEqualTo(expectedMessage);
+		}
 	}
 
 }
