@@ -1,42 +1,23 @@
-import Exceptions.*;
-import program.*;
+package program;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import Exceptions.InvalidStudentMarksException;
 
-public class Main
-{
-    public static void main(String[] args)
-    {
-        FileIO f = null;
-        try
-        {
-            //f = new FileIO("D:/Testing/src/test/java/InputFile TestCases/2.txt");
-            f = new FileIO("../java/InputFile TestCases/2.txt");
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        if(f!=null)
-        {
-            try
-            {
-                f.read_file();
-            }
-            catch (InvalidStudentMarksException | InvalidCourseNameException | InvalidStudentIdException |
-                   InvalidStudentNameException | InvalidCourseCodeException | IOException e)
-            {
-                e.printStackTrace();
-            }
-            try
-            {
-                f.write_file();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String args[])
+	{
+		Student student = new Student();
+		Scanner scanner = new Scanner(System.in);
+		int value = scanner.nextInt();
+		try {
+			student.setActivitiesMark(value);
+		} catch (InvalidStudentMarksException e) {
+			e.printStackTrace();
+		} catch (InputMismatchException e)
+		{
+			System.out.println(e + "hhhhh");
+		}
+	}
 }

@@ -11,27 +11,18 @@ import Exceptions.InvalidStudentNameException;
 public class FileIO
 {
     private String path;
-    private final ArrayList<Student> students;
-    private final Course course;
-
-    public ArrayList<Student> getStudents() {
-        return students;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
+    private ArrayList<Student> students;
+    private Course course;
     public FileIO()
     {
-        students = new ArrayList<>();
+        students = new ArrayList<Student>();
         course = new Course();
     }
 
-    public FileIO(String path) throws FileNotFoundException
+    public FileIO(String path)
     {
-        this.set_path(path);
-        students = new ArrayList<>();
+        this.path = path;
+        students = new ArrayList<Student>();
         course = new Course();
     }
 
@@ -43,24 +34,10 @@ public class FileIO
      * Output: The function return nothing as it assigns the location of the file inside the path attribute only
      *
      */
-    public void set_path(String path) throws FileNotFoundException,NullPointerException
+    public void set_path(String path)
     {
-        if(path.isEmpty())
-        {
-            throw new NullPointerException("File Path is empty");
-        }
-        else
-        {
-            File file = new File(path);
-            if (file.exists())
-            {
-                this.path = path;
-            }
-            else
-            {
-                throw new FileNotFoundException("File not found: " + path);
-            }
-        }
+
+        this.path = path;
     }
 
     /*
@@ -85,52 +62,99 @@ public class FileIO
      * Output: The function return nothing as it reads the input file and stores its data in object attributes
      *
      */
-    public void read_file() throws IOException, InvalidStudentMarksException, InvalidCourseNameException, InvalidStudentIdException, InvalidStudentNameException, InvalidCourseCodeException {
+    public void read_file()
+    {
         String line;
         int lineNumber = 0;
-
-        try (FileReader fileReader = new FileReader(path);
-             BufferedReader buffer = new BufferedReader(fileReader)) {
+        try
+        {
+            FileReader fileReader = new FileReader(path);
+            BufferedReader buffer = new BufferedReader(fileReader);
 
             // reading the file, line by line
-            while ((line = buffer.readLine()) != null) {
-                store_data(line, lineNumber++);
-            }
+            while((line = buffer.readLine()) != null)
+                store_data(line,lineNumber++);
+            buffer.close();
+        }
+        catch(IOException e)
+        {
+            System.out.println("Exception: " +e);
         }
     }
 
-
     /*
-     * Description: write the Excel file that holds the results of student, the file is present in the same path as input file
+     * Description: write the excel file that holds the results of student, the file is present in the same path as input file
      *
      * Input: no input as it depends on the data stored
      *
      * Output: The function return nothing as it write the results file only with extension .csv
      *
      */
-    public void write_file() throws IOException
+    public void write_file()
     {
-        String filePath = path.substring(0, path.lastIndexOf('/') + 1) + "Results.csv";
-        try (FileWriter writer = new FileWriter(filePath)) {
-            StringBuilder contentBuilder = new StringBuilder();
+        try
+        {
+            path = path.substring(0,path.lastIndexOf('/') + 1);
 
-            contentBuilder.append("Subject Name:").append(course.getName()).append(",,,,,");
-            contentBuilder.append("Max Mark: 100\n\n");
-            contentBuilder.append("Student name,Student number,GPA,Grade\n");
+            FileWriter writer = new FileWriter(path + "Results.csv");
 
-            for (Student student : students) {
-                contentBuilder.append(student.getName()).append(",");
-                contentBuilder.append(student.getId()).append(",");
-                contentBuilder.append(student.getGpa()).append(",");
-                contentBuilder.append(student.getGrade()).append("\n");
+            writer.append("Subject Name:" + course.getName());
+            writer.append(',');
+            writer.append(',');
+            writer.append(',');
+            writer.append(',');
+            writer.append(',');
+            writer.append(',');
+
+            writer.append("Max Mark: 100");
+            writer.append(',');
+            writer.append(',');
+            writer.append("\n\n");
+            writer.append("Student name");
+            writer.append(',');
+            writer.append(',');
+            writer.append(',');
+            writer.append("Student number");
+            writer.append(',');
+            writer.append(',');
+            writer.append("GPA");
+            writer.append(',');
+            writer.append(',');
+            writer.append("Grade");
+            writer.append(',');
+            writer.append(',');
+            writer.append('\n');
+            // Write the data to the file
+            for (Student student : students)
+            {
+                writer.append(student.getName());
+                writer.append(',');
+                writer.append(',');
+                writer.append(',');
+                writer.append(student.getId());
+                writer.append(',');
+                writer.append(',');
+                writer.append(student.getGpa());
+                writer.append(',');
+                writer.append(',');
+                writer.append(student.getGrade());
+                writer.append(',');
+                writer.append(',');
+                writer.append('\n');
             }
 
-            writer.write(contentBuilder.toString());
+            // Close the FileWriter object
+            writer.flush();
+            writer.close();
 
             System.out.println("Successfully wrote to the file.");
         }
+        catch (IOException e)
+        {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
-
 
     /*
      * Description: store data for each student when parsing file line by line
@@ -140,25 +164,79 @@ public class FileIO
      * Output: The function return nothing as it stores the data in attributes which are course & arraylist of students
      *
      */
-    public void store_data(String line, int lineNumber) throws InvalidCourseNameException, InvalidCourseCodeException, InvalidStudentMarksException, InvalidStudentIdException, InvalidStudentNameException {
+    public void store_data(String line, int lineNumber)
+    {
         String[] words =line.split(",");
         if(lineNumber == 0)
         {
-            course.setName(words[0]);
-            course.setCode(words[1]);
+            try {
+				course.setName(words[0]);
+			} catch (InvalidCourseNameException e) {				
+				System.out.println(e);
+			}
+            try {
+				course.setCode(words[1]);
+			} catch (InvalidCourseCodeException e) {				
+				System.out.println(e);
+			}
         }
         else
         {
             Student student = new Student();
-            student.setName(words[0]);
-            student.setId(words[1]);
-            student.setActivitiesMark(Integer.parseInt(words[2]));
-            student.setOralPracticalMark(Integer.parseInt(words[3]));
-            student.setMidtermMark(Integer.parseInt(words[4]));
-            student.setFinalMark(Integer.parseInt(words[5]));
-            student.setTotalMark(Calculator.compute_total_mark(student.getActivitiesMark(),student.getOralPracticalMark(),student.getMidtermMark(),student.getFinalMark()));
-            student.setGrade(Calculator.compute_Grade(student.getTotalMark()));
-            student.setGpa(Calculator.compute_GPA(student.getGrade()));
+            
+                    try {
+						student.setName(words[0]);
+					} catch (InvalidStudentNameException e) {
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setId(words[1]);
+					} catch (InvalidStudentIdException e) {
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setActivitiesMark(Integer.parseInt(words[2]));
+					} catch (NumberFormatException e) {
+						System.out.println(e);
+					} catch (InvalidStudentMarksException e) {
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setOralPracticalMark(Integer.parseInt(words[3]));
+					} catch (NumberFormatException e) {						
+						System.out.println(e);
+					} catch (InvalidStudentMarksException e) {
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setMidtermMark(Integer.parseInt(words[4]));
+					} catch (NumberFormatException e) {
+						
+						System.out.println(e);
+					} catch (InvalidStudentMarksException e) {
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setFinalMark(Integer.parseInt(words[5]));
+					} catch (NumberFormatException e) {						
+						System.out.println(e);
+					} catch (InvalidStudentMarksException e) {						
+						System.out.println(e);
+					}
+                    
+                    try {
+						student.setTotalMark(Calculator.compute_total_mark(student.getActivitiesMark(),student.getOralPracticalMark(),student.getMidtermMark(),student.getFinalMark()));
+					} catch (InvalidStudentMarksException e) {						
+						System.out.println(e);
+					}
+                    
+                    student.setGrade(Calculator.compute_Grade(student.getTotalMark()));
+                    student.setGpa(Calculator.compute_GPA(student.getGrade()));
             students.add(student);
         }
     }
