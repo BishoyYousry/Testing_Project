@@ -7,7 +7,8 @@ public class InvalidCourseNameException extends Exception{
 	public static final String INVALID_COURSE_NAME_START_WITH_SPACE = "Course Name must Start with alphabetic chars";
 	public static final String INVALID_COURSE_NAME_NO_SPACE = "Course Name must have at least one space";
 	public static final String INVALID_COURSE_NAME_ALPHABETIC = "Course Name must contain alphabetic chars only";
-	
+	public static final String INVALID_COURSE_NAME_ONE_SPACE = "Course name must has at least one space";
+
 	public InvalidCourseNameException()
 	{
 		super();
