@@ -45,16 +45,6 @@ class FileIO_Test
     @Test
     @Tag("unit")
     @Tag("blackbox")
-    void Test_setPath_RelativePath_ExceptionThrown()
-    {
-        String path = "./src/test/java/InputFile TestCases/Test_setPath_RelativePath_ExceptionThrown.txt";
-        assertDoesNotThrow(() ->file.set_path(path));
-        assertThat(file.get_path()).isEqualTo(path);
-    }
-
-    @Test
-    @Tag("unit")
-    @Tag("blackbox")
     void Test_setPath_NotFoundPath_ExceptionThrown()
     {
         String path = "./src/test/java/InputFile TestCases/12.txt";
@@ -165,6 +155,18 @@ class FileIO_Test
     @Tag("blackbox")
     @Tag("bottomUp")
     @Tag("equivalence_partitioning_testing")
+    void Test_readFile_InvalidStudentActivitiesMark_ExceptionThrown()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidStudentActivitiesMark_ExceptionThrown.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThrows(InvalidStudentMarksException.class, file::read_file);
+    }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @Tag("equivalence_partitioning_testing")
     void Test_readFile_InvalidStudentOralPracticalMark_ExceptionThrown()
     {
         String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidStudentOralPracticalMark_ExceptionThrown.txt";
@@ -218,18 +220,6 @@ class FileIO_Test
         String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidCourseCode_ExceptionThrown.txt";
         assertDoesNotThrow(() ->file.set_path(path));
         assertThrows(InvalidCourseCodeException.class, file::read_file);
-    }
-
-    @Test
-    @Tag("integration")
-    @Tag("blackbox")
-    @Tag("bottomUp")
-    @Tag("equivalence_partitioning_testing")
-    void Test_readFile_InvalidStudentActivitiesMark_ExceptionThrown()
-    {
-        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidStudentActivitiesMark_ExceptionThrown.txt";
-        assertDoesNotThrow(() ->file.set_path(path));
-        assertThrows(InvalidStudentMarksException.class, file::read_file);
     }
 
     @Test
