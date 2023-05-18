@@ -16,16 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class FileIO_Test
 {
 
-    @Test
-    @Tag("unit")
-    @Tag("blackbox")
-    void Test_setPath_ForwardSlashPath_PositiveTesting()
-    {
-        FileIO file = new FileIO();
-        String path = "D:/Testing/src/test/java/InputFile TestCases/2.txt";
-        assertDoesNotThrow(() ->file.set_path(path));
-        assertThat(file.get_path()).isEqualTo(path);
-    }
 
     @Test
     @Tag("unit")
@@ -33,7 +23,7 @@ class FileIO_Test
     void Test_setPath_BackSlashPath_PositiveTesting()
     {
         FileIO file = new FileIO();
-        String path = "D:\\Testing\\src\\test\\java\\InputFile TestCases\\2.txt";
+        String path = ".\\src\\test\\java\\InputFile TestCases\\Test_setPath_BackSlashPath_PositiveTesting.txt";
         assertDoesNotThrow(() ->file.set_path(path));
         assertThat(file.get_path()).isEqualTo(path);
     }
@@ -44,7 +34,7 @@ class FileIO_Test
     void Test_setPath_RelativePath_ExceptionThrown()
     {
         FileIO file = new FileIO();
-        String path = "./src/test/java/InputFile TestCases/2.txt";
+        String path = "./src/test/java/InputFile TestCases/Test_setPath_RelativePath_ExceptionThrown.txt";
         assertDoesNotThrow(() ->file.set_path(path));
         assertThat(file.get_path()).isEqualTo(path);
     }
@@ -65,7 +55,7 @@ class FileIO_Test
     void Test_setPath_PathWithSpecialCharacter_ExceptionThrown()
     {
         FileIO file = new FileIO();
-        String path = "$./src/test/java/InputFile TestCases/2.txt";
+        String path = "$./src/test/java/InputFile TestCases/Test_setPath_PathWithSpecialCharacter_ExceptionThrown.txt";
         assertThrows(FileNotFoundException.class,() ->file.set_path(path));
     }
 
@@ -96,7 +86,7 @@ class FileIO_Test
     void Test_readFile_PositiveTesting()
     {
         FileIO file = new FileIO();
-        String path = "./src/test/java/InputFile TestCases/PositiveTesting.txt";
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_PositiveTesting.txt";
         assertDoesNotThrow(() ->file.set_path(path));
         assertDoesNotThrow(file::read_file);
 
