@@ -1,5 +1,6 @@
 import Exceptions.InvalidCourseCodeException;
 import Exceptions.InvalidCourseNameException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -13,12 +14,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class Course_Test
 {
+
+	private final Course course = new Course();
+
+	/*
+	 ************************************************************
+	 ************************************************************
+	 * The following Test cases are related to BlackBox Testing
+	 ************************************************************
+	 ************************************************************
+	 */
+
 	@Test
 	@Tag("unit")
 	@Tag("blackbox")
 	void Test_setName_PositiveTesting()
 	{
-		Course course = new Course();
 		String courseName = "Computer Architecture";
 		assertDoesNotThrow(() ->course.setName(courseName));
 		assertThat(course.getName()).isEqualTo(courseName);
@@ -29,7 +40,6 @@ class Course_Test
 	@Tag("blackbox")
 	void Test_setName_NameContainsNumbers_ExceptionThrown()
 	{
-		Course course = new Course();
 		String courseName = "CSE123";
 		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> course.setName(courseName));
 		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC;
@@ -42,7 +52,6 @@ class Course_Test
 	@Tag("blackbox")
 	void Test_setName_NameStartsWithNumbers_ExceptionThrown()
 	{
-		Course course = new Course();
 		String courseName = "123";
 		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> course.setName(courseName));
 		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC;
@@ -55,7 +64,6 @@ class Course_Test
 	@Tag("blackbox")
 	void Test_setName_NameContainsSpace_StoredSuccessfully()
 	{
-		Course course = new Course();
 		String courseName = "CSE Subject";
 		assertDoesNotThrow(() ->course.setName(courseName));
 		assertThat(course.getName()).isEqualTo(courseName);
@@ -66,7 +74,6 @@ class Course_Test
 	@Tag("blackbox")
 	void Test_setName_NameStartsWithSpace_ExceptionThrown()
 	{
-		Course course = new Course();
 		String courseName = " CSE Subject";
 		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> course.setName(courseName));
 		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_START_WITH_SPACE;
@@ -79,7 +86,6 @@ class Course_Test
 	@Tag("blackbox")
 	void Test_setName_NameIsEmpty_ExceptionThrown()
 	{
-		Course course = new Course();
 		String courseName = "";
 		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> course.setName(courseName));
 		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC;
@@ -155,7 +161,7 @@ class Course_Test
 	void Test_ParametrizedConstructor_NameIsEmpty_ExceptionThrown()
 	{
 		String courseName = "";
-		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () ->  new Course(courseName, "CSE123s"));
+		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> new Course(courseName, "CSE123s"));
 		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -166,7 +172,6 @@ class Course_Test
 	@Tag("blackbox")
 	void Test_setCode_SixCharacters_PositiveTesting()
 	{
-		Course course = new Course();
 		String courseCode = "CSE123";
 		assertDoesNotThrow(() ->course.setCode(courseCode));
 		assertThat(course.getCode()).isEqualTo(courseCode);
@@ -177,7 +182,6 @@ class Course_Test
 	@Tag("blackbox")
 	void Test_setCode_SevenCharacters_PositiveTesting()
 	{
-		Course course = new Course();
 		String courseCode = "CSE123s";
 		assertDoesNotThrow(() ->course.setCode(courseCode));
 		assertThat(course.getCode()).isEqualTo(courseCode);
@@ -189,7 +193,6 @@ class Course_Test
 	@ValueSource(strings = {"CS123","123"})
 	void Test_setCode_NumberOfAlphabetIsLessThanThree_ExceptionThrown(String courseCode)
 	{
-		Course course = new Course();
 		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> course.setCode(courseCode));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
@@ -201,7 +204,6 @@ class Course_Test
 	@Tag("blackbox")
 	void Test_setCode_NumberOfAlphabetIsGreaterThanThree_ExceptionThrown()
 	{
-		Course course = new Course();
 		String courseCode = "CSEA123";
 		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> course.setCode(courseCode));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
@@ -215,7 +217,6 @@ class Course_Test
 	@ValueSource(strings = {"CSE12","cse"})
 	void Test_setCode_NumberOfDigitsIsLessThanThree_ExceptionThrown(String courseCode)
 	{
-		Course course = new Course();
 		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> course.setCode(courseCode));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
@@ -227,7 +228,6 @@ class Course_Test
 	@Tag("blackbox")
 	void Test_setCode_NumberOfDigitsIsGreaterThanThree_ExceptionThrown()
 	{
-		Course course = new Course();
 		String courseCode = "CSE1234";
 		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> course.setCode(courseCode));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
@@ -241,7 +241,6 @@ class Course_Test
 	@ValueSource(strings = {"123CSE","cs123e"})
 	void Test_setCode_DifferentOrder_ExceptionThrown(String courseCode)
 	{
-		Course course = new Course();
 		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> course.setCode(courseCode));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
@@ -254,7 +253,6 @@ class Course_Test
 	@ValueSource(strings = {"CSE123S","CSE123A"})
 	void Test_setCode_DifferentSeventhCharacter_ExceptionThrown(String courseCode)
 	{
-		Course course = new Course();
 		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> course.setCode(courseCode));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_LAST_CHAR;
 		String actualMessage = exception.getMessage();
@@ -267,7 +265,6 @@ class Course_Test
 	@ValueSource(strings = {"CSE 123","C@S123s","cse-123"," "})
 	void Test_setCode_SpecialCharacter_ExceptionThrown(String courseCode)
 	{
-		Course course = new Course();
 		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> course.setCode(courseCode));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
@@ -280,7 +277,6 @@ class Course_Test
 	@ValueSource(strings = {"CSE123sA","C@S123s1","CSE123s$","cse123ss"})
 	void Test_setCode_ExtraItemAfterSeventh_ExceptionThrown(String courseCode)
 	{
-		Course course = new Course();
 		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> course.setCode(courseCode));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
@@ -404,4 +400,112 @@ class Course_Test
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
 	}
+
+
+	/*
+	 ************************************************************
+	 ************************************************************
+	 * The following Test cases are related to WhiteBox Testing
+	 ************************************************************
+	 ************************************************************
+	 */
+
+	@ParameterizedTest
+	@ValueSource(strings = {"$Embedded Systems", "+SW dev", "Data12 Base", "M_ ", "Mr. DB"})
+	@Tag("white-box")
+	@Tag("branch_coverage")
+	@DisplayName("Test case to fail the first condition that related to alphabets")
+	void Test_setName_EnterSomeTestCasesToFailTheFirstCondition_ExceptionThrown(String name)
+	{
+		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class,
+				()->course.setName(name));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+
+	@Test
+	@Tag("white-box")
+	@Tag("branch_coverage")
+	void Test_setName_EnterNameThatStartsWithSpace_ExceptionThrown()
+	{
+		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class,
+				()->course.setName(" DB"));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_START_WITH_SPACE;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+	@Test
+	@Tag("white-box")
+	@Tag("branch_coverage")
+	void Test_setName_EnterNameWithoutAnySpaces_ExceptionThrown()
+	{
+		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class,
+				()->course.setName("DataBase"));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ONE_SPACE;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {" ", "ABCDE", "ABCDEFGH"})
+	@Tag("white-box")
+	@Tag("conditional_coverage")
+	@DisplayName("Test the first condition in setCode function that is related to the length of" +
+			"the code which must be 6 or 7")
+	void Test_setCode_EnterCodeToTestTheFirstCondition_ExceptionThrown(String code)
+	{
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class,
+				()->course.setCode(code));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+
+	@ParameterizedTest
+	@ValueSource(strings = {"CSE12_", "123CSE", "CSEABC"})
+	@Tag("white-box")
+	@Tag("conditional_coverage")
+	@DisplayName("Test the second condition in setCode function. To pass it must has 3chars + 3 no.")
+	void Test_setCode_EnterCodeToTestTheSecondCondition_ExceptionThrown(String code)
+	{
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class,
+				()->course.setCode(code));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"CSE123_", "123CSEs", "      s"})
+	@Tag("white-box")
+	@Tag("conditional_coverage")
+	@DisplayName("Test the third condition in setCode function. To pass it must has 3chars + 3 no. + 1 char")
+	void Test_setCode_EnterCodeToTestTheThirdCondition_ExceptionThrown(String code)
+	{
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class,
+				()->course.setCode(code));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
+
+	@ParameterizedTest
+	@ValueSource(strings = {"CSE123h", "cse950S"})
+	@Tag("white-box")
+	@Tag("conditional_coverage")
+	@DisplayName("Test the fourth condition in setCode function. the 7th char must be 's'")
+	void Test_setCode_EnterCodeToTestTheFourthCondition_ExceptionThrown(String code)
+	{
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class,
+				()->course.setCode(code));
+		String actualMessage = exception.getMessage();
+		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_LAST_CHAR;
+		assertThat(actualMessage).isEqualTo(expectedMessage);
+	}
+
 }
