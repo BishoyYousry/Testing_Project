@@ -1,10 +1,16 @@
+import Exceptions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import program.Course;
 import program.FileIO;
 import program.Student;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileIO_Test
 {
+    private final FileIO file = new FileIO();
 
 
     @Test
@@ -22,7 +29,6 @@ class FileIO_Test
     @Tag("blackbox")
     void Test_setPath_BackSlashPath_PositiveTesting()
     {
-        FileIO file = new FileIO();
         String path = ".\\src\\test\\java\\InputFile TestCases\\Test_setPath_BackSlashPath_PositiveTesting.txt";
         assertDoesNotThrow(() ->file.set_path(path));
         assertThat(file.get_path()).isEqualTo(path);
@@ -33,7 +39,6 @@ class FileIO_Test
     @Tag("blackbox")
     void Test_setPath_RelativePath_ExceptionThrown()
     {
-        FileIO file = new FileIO();
         String path = "./src/test/java/InputFile TestCases/Test_setPath_RelativePath_ExceptionThrown.txt";
         assertDoesNotThrow(() ->file.set_path(path));
         assertThat(file.get_path()).isEqualTo(path);
@@ -44,7 +49,6 @@ class FileIO_Test
     @Tag("blackbox")
     void Test_setPath_NotFoundPath_ExceptionThrown()
     {
-        FileIO file = new FileIO();
         String path = "./src/test/java/InputFile TestCases/12.txt";
         assertThrows(FileNotFoundException.class,() ->file.set_path(path));
     }
@@ -54,7 +58,6 @@ class FileIO_Test
     @Tag("blackbox")
     void Test_setPath_PathWithSpecialCharacter_ExceptionThrown()
     {
-        FileIO file = new FileIO();
         String path = "$./src/test/java/InputFile TestCases/Test_setPath_PathWithSpecialCharacter_ExceptionThrown.txt";
         assertThrows(FileNotFoundException.class,() ->file.set_path(path));
     }
@@ -64,7 +67,6 @@ class FileIO_Test
     @Tag("blackbox")
     void Test_setPath_EmptyPath_ExceptionThrown()
     {
-        FileIO file = new FileIO();
         String path = "";
         assertThrows(FileNotFoundException.class,() ->file.set_path(path));
     }
@@ -75,17 +77,16 @@ class FileIO_Test
     @Tag("blackbox")
     void Test_setPath_NullPath_ExceptionThrown()
     {
-        FileIO file = new FileIO();
         assertThrows(NullPointerException.class,() ->file.set_path(null));
     }
 
     @Test
     @Tag("integration")
     @Tag("blackbox")
+    @Tag("bottomUp")
     @Tag("equivalence_partitioning_testing")
     void Test_readFile_PositiveTesting()
     {
-        FileIO file = new FileIO();
         String path = "./src/test/java/InputFile TestCases/Test_readFile_PositiveTesting.txt";
         assertDoesNotThrow(() ->file.set_path(path));
         assertDoesNotThrow(file::read_file);
@@ -123,5 +124,52 @@ class FileIO_Test
             assertThat(student.getFinalMark()).isEqualTo(ExpectedStudentFinalMark.get(i));
         }
 
+    }
+
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    void Test_write_file_PositiveTesting()
+    {
+        ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStreamCaptor));
+        try {
+            file.set_path("./src/test/java/InputFile TestCases/Test_write_file_PositiveTesting.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        assertDoesNotThrow(file::write_file);
+        String expectedMessage = "Successfully wrote to the file.";
+        assertThat(expectedMessage).isEqualTo(outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @DisplayName("The input file has some invalid data.The output must be created but contain null values")
+    void Test_write_file_TheInputFileHasInvalidData()
+    {
+        ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStreamCaptor));
+        try {
+            file.set_path("./src/test/java/InputFile TestCases/Test_write_file_TheInputFileHasInvalidData_ExceptionThrown.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            file.read_file();
+        } catch (IOException | InvalidStudentMarksException |
+                InvalidCourseNameException | InvalidStudentIdException |
+                InvalidStudentNameException | InvalidCourseCodeException e) {
+            e.printStackTrace();
+        }
+        assertDoesNotThrow(file::write_file);
+        String expectedMessage = "Successfully wrote to the file.";
+        assertThat(expectedMessage).isEqualTo(outputStreamCaptor.toString().trim());
+        Course course = file.getCourse();
+        assertThat(course.getName()).isEqualTo(null);
     }
 }

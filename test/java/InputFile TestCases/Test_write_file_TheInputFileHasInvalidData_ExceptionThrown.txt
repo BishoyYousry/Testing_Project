@@ -1,0 +1,6 @@
+ComputerOrganization,CSE221s,?
+Bishoy_Yousry,.19007330,5,7,6,55
+YoussefEmad,1704/7640,10,10,20,60
+OmarAMonem,18004530,10,9,10,50
+ZeyadMohamed,17057430,8,8,14,35
+MalekMalek,15349840,5,3,16,60
