@@ -63,28 +63,41 @@ public class Calculator {
     public static String compute_GPA(String Grade){
 		String GPA;
 
-		if(Grade == "F")
-			GPA = "0";
-		else if(Grade == "D")
-			GPA = "1";
-		else if(Grade == "D+")
-			GPA = "1.3";
-		else if(Grade == "C-")
-			GPA = "1.7";
-		else if(Grade == "C")
-			GPA = "2";
-		else if(Grade == "C+")
-			GPA = "2.3";
-		else if(Grade == "B-")
-			GPA = "2.7";
-		else if(Grade == "B")
-			GPA = "3";
-		else if(Grade == "B+")
-			GPA = "3.3";
-		else if(Grade == "A-")
-			GPA = "3.7";
-		else 
-			GPA = "4";
+		switch (Grade) {
+			case "F":
+				GPA = "0";
+				break;
+			case "D":
+				GPA = "1";
+				break;
+			case "D+":
+				GPA = "1.3";
+				break;
+			case "C-":
+				GPA = "1.7";
+				break;
+			case "C":
+				GPA = "2";
+				break;
+			case "C+":
+				GPA = "2.3";
+				break;
+			case "B-":
+				GPA = "2.7";
+				break;
+			case "B":
+				GPA = "3";
+				break;
+			case "B+":
+				GPA = "3.3";
+				break;
+			case "A-":
+				GPA = "3.7";
+				break;
+			default:
+				GPA = "4";
+				break;
+		}
 
 		return GPA;
     }

@@ -12,7 +12,7 @@ public class Main
         try
         {
             //f = new FileIO("D:/Testing/src/test/java/InputFile TestCases/2.txt");
-            f = new FileIO("../java/InputFile TestCases/2.txt");
+            f = new FileIO("../../../test/java/InputFile TestCases/2.txt");
         }
         catch (FileNotFoundException e)
         {

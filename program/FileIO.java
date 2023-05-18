@@ -2,6 +2,7 @@ package program;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.nio.file.Paths;
 
 import Exceptions.InvalidCourseCodeException;
 import Exceptions.InvalidCourseNameException;
@@ -45,21 +46,25 @@ public class FileIO
      */
     public void set_path(String path) throws FileNotFoundException,NullPointerException
     {
-        if(path.isEmpty())
+
+        File file = new File(path);
+        try {
+            boolean created = file.createNewFile();
+            if (created) {
+                System.out.println("File created successfully.");
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while creating the file: " + e.getMessage());
+        }
+        if (file.exists())
         {
-            throw new NullPointerException("File Path is empty");
+            this.path = path;
         }
         else
         {
-            File file = new File(path);
-            if (file.exists())
-            {
-                this.path = path;
-            }
-            else
-            {
-                throw new FileNotFoundException("File not found: " + path);
-            }
+            throw new FileNotFoundException("File not found: " + path);
         }
     }
 

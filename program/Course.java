@@ -5,8 +5,16 @@ import Exceptions.*;
 public class Course {
 	private String name;
 	private String code;
+	static final int activitiesFullMark = 10;
+	static private final int oralPracticalFullMark = 10;
+	static private final int midtermFullMark = 20;
+	static private final int finalFullMark = 60;
+	static private final int totalFullMark = 100;
 
-	public Course() {}
+	public Course()
+	{
+		
+	}
 	
 	
 	public Course(String name, String code) throws  InvalidCourseNameException,InvalidCourseCodeException
@@ -36,7 +44,7 @@ public class Course {
 		if(code.length() != 6 &&code.length() != 7)
 			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);
 		else if(code.length() == 6 && !(code.matches("^[a-zA-Z]{3}[0-9]{3}$")))
-			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);
+			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);	
 		else if(code.length() == 7 && !(code.matches("^[a-zA-Z]{3}[0-9]{3}[a-zA-Z]{1}$")))
 			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);
 		else if(code.length() == 7 && code.charAt(6)!= 's')
