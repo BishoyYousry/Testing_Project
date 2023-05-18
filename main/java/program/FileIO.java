@@ -1,15 +1,10 @@
 package program;
 
-import java.io.*;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.nio.file.Paths;
+import Exceptions.*;
 
-import Exceptions.InvalidCourseCodeException;
-import Exceptions.InvalidCourseNameException;
-import Exceptions.InvalidStudentIdException;
-import Exceptions.InvalidStudentMarksException;
-import Exceptions.InvalidStudentNameException;
+import java.io.*;
+import java.util.ArrayList;
+
 public class FileIO
 {
     private String path;
@@ -84,7 +79,7 @@ public class FileIO
      * Output: The function return nothing as it reads the input file and stores its data in object attributes
      *
      */
-    public void read_file() throws IOException, InvalidStudentMarksException, InvalidCourseNameException, InvalidStudentIdException, InvalidStudentNameException, InvalidCourseCodeException {
+    public void read_file() throws IOException, InvalidStudentMarksException, InvalidCourseNameException, InvalidStudentIdException, InvalidStudentNameException, InvalidCourseCodeException, InvalidCourseMarkException {
         String line;
         int lineNumber = 0;
 
@@ -139,12 +134,13 @@ public class FileIO
      * Output: The function return nothing as it stores the data in attributes which are course & arraylist of students
      *
      */
-    public void store_data(String line, int lineNumber) throws InvalidCourseNameException, InvalidCourseCodeException, InvalidStudentMarksException, InvalidStudentIdException, InvalidStudentNameException {
+    public void store_data(String line, int lineNumber) throws InvalidCourseNameException, InvalidCourseCodeException, InvalidStudentMarksException, InvalidStudentIdException, InvalidStudentNameException, InvalidCourseMarkException {
         String[] words =line.split(",");
         if(lineNumber == 0)
         {
             course.setName(words[0]);
             course.setCode(words[1]);
+            course.setMaxMark(words[2]);
         }
         else
         {

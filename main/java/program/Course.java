@@ -5,24 +5,31 @@ import Exceptions.*;
 public class Course {
 	private String name;
 	private String code;
-	static final int activitiesFullMark = 10;
-	static private final int oralPracticalFullMark = 10;
-	static private final int midtermFullMark = 20;
-	static private final int finalFullMark = 60;
-	static private final int totalFullMark = 100;
-
+	private String maxMark;
 	public Course()
 	{
-		
+		this.name = "";
+		this.code= "";
+		this.maxMark="";
 	}
 	
 	
-	public Course(String name, String code) throws  InvalidCourseNameException,InvalidCourseCodeException
+	public Course(String name, String code,String maxMark) throws  InvalidCourseNameException,InvalidCourseCodeException,InvalidCourseMarkException
 	{
 		this.setName(name);
 		this.setCode(code);
+		this.setMaxMark(maxMark);
+	}
+	public void setMaxMark(String maxMark) throws InvalidCourseMarkException {
+		if(!maxMark.equals("100"))
+			throw new InvalidCourseMarkException(InvalidCourseMarkException.INVALID_COURSE_MARK);
+		else
+      		this.maxMark=maxMark;
 	}
 
+	public String getMaxMark(){
+		return this.maxMark;
+	}
 
 	public String getName() {
 		return name;
@@ -45,7 +52,7 @@ public class Course {
 			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);
 		else if(code.length() == 6 && !(code.matches("^[a-zA-Z]{3}[0-9]{3}$")))
 			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);	
-		else if(code.length() == 7 && !(code.matches("^[a-zA-Z]{3}[0-9]{3}[a-zA-Z]{1}$")))
+		else if(code.length() == 7 && !(code.matches("^[a-zA-Z]{3}[0-9]{3}[a-zA-Z]$")))
 			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);
 		else if(code.length() == 7 && code.charAt(6)!= 's')
 			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_LAST_CHAR);
