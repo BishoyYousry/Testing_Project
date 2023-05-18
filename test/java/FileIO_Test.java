@@ -1,5 +1,4 @@
 import Exceptions.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -23,6 +22,15 @@ class FileIO_Test
 {
     private final FileIO file = new FileIO();
 
+    @Test
+    @Tag("unit")
+    @Tag("blackbox")
+    void Test_setPath_ForwardSlashPath_PositiveTesting()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_setPath_ForwardSlashPath_PositiveTesting.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThat(file.get_path()).isEqualTo(path);
+    }
 
     @Test
     @Tag("unit")
@@ -98,6 +106,7 @@ class FileIO_Test
         //Expected Input Course Data
         String ExpectedCourseName = "Computer Organization";
         String ExpectedCourseCode = "CSE221s";
+        String ExpectedCourseMark = "100";
 
         //Expected Input Student Data
         List<String> ExpectedStudentName = new ArrayList<>(Arrays.asList("Bishoy Yousry", "Youssef Emad", "Omar AMonem", "Zeyad Mohamed", "Malek Malek"));
@@ -110,6 +119,7 @@ class FileIO_Test
         //Course Assertions
         assertThat(course.getName()).isEqualTo(ExpectedCourseName);
         assertThat(course.getCode()).isEqualTo(ExpectedCourseCode);
+        assertThat(course.getMaxMark()).isEqualTo(ExpectedCourseMark);
 
         // Student Assertions
         assertThat(students.size()).isEqualTo(ExpectedStudentName.size());
@@ -126,6 +136,113 @@ class FileIO_Test
 
     }
 
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @Tag("equivalence_partitioning_testing")
+    void Test_readFile_InvalidStudentName_ExceptionThrown()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidStudentName_ExceptionThrown.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThrows(InvalidStudentNameException.class, file::read_file);
+    }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @Tag("equivalence_partitioning_testing")
+    void Test_readFile_InvalidStudentId_ExceptionThrown()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidStudentId_ExceptionThrown.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThrows(InvalidStudentIdException.class, file::read_file);
+    }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @Tag("equivalence_partitioning_testing")
+    void Test_readFile_InvalidStudentOralPracticalMark_ExceptionThrown()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidStudentOralPracticalMark_ExceptionThrown.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThrows(InvalidStudentMarksException.class, file::read_file);
+    }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @Tag("equivalence_partitioning_testing")
+    void Test_readFile_InvalidStudentMidtermMark_ExceptionThrown()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidStudentMidtermMark_ExceptionThrown.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThrows(NumberFormatException.class, file::read_file);
+    }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @Tag("equivalence_partitioning_testing")
+    void Test_readFile_InvalidStudentFinalMark_ExceptionThrown()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidStudentFinalMark_ExceptionThrown.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThrows(InvalidStudentMarksException.class, file::read_file);
+    }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @Tag("equivalence_partitioning_testing")
+    void Test_readFile_InvalidCourseName_ExceptionThrown()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidCourseName_ExceptionThrown.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThrows(InvalidCourseNameException.class, file::read_file);
+    }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @Tag("equivalence_partitioning_testing")
+    void Test_readFile_InvalidCourseCode_ExceptionThrown()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidCourseCode_ExceptionThrown.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThrows(InvalidCourseCodeException.class, file::read_file);
+    }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @Tag("equivalence_partitioning_testing")
+    void Test_readFile_InvalidStudentActivitiesMark_ExceptionThrown()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidStudentActivitiesMark_ExceptionThrown.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThrows(InvalidStudentMarksException.class, file::read_file);
+    }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @Tag("equivalence_partitioning_testing")
+    void Test_readFile_InvalidMaxMark_ExceptionThrown()
+    {
+        String path = "./src/test/java/InputFile TestCases/Test_readFile_InvalidMaxMark_ExceptionThrown.txt";
+        assertDoesNotThrow(() ->file.set_path(path));
+        assertThrows(InvalidCourseMarkException.class, file::read_file);
+    }
 
     @Test
     @Tag("integration")
@@ -163,7 +280,7 @@ class FileIO_Test
             file.read_file();
         } catch (IOException | InvalidStudentMarksException |
                 InvalidCourseNameException | InvalidStudentIdException |
-                InvalidStudentNameException | InvalidCourseCodeException e) {
+                InvalidStudentNameException | InvalidCourseCodeException|InvalidCourseMarkException e ) {
             e.printStackTrace();
         }
         assertDoesNotThrow(file::write_file);

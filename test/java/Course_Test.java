@@ -1,4 +1,5 @@
 import Exceptions.InvalidCourseCodeException;
+import Exceptions.InvalidCourseMarkException;
 import Exceptions.InvalidCourseNameException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -100,7 +101,7 @@ class Course_Test
 	{
 		String courseName = "Computer Architecture";
 		Course[] course = {null};
-		assertDoesNotThrow(() ->course[0] = new Course(courseName,"CSE123s"));
+		assertDoesNotThrow(() ->course[0] = new Course(courseName,"CSE123s","100"));
 		assertThat(course[0].getName()).isEqualTo(courseName);
 	}
 
@@ -112,7 +113,7 @@ class Course_Test
 		String courseName = "CSE123";
 		Course[] course = {null};
 		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> {
-			course[0] = new Course(courseName, "CSE123s");
+			course[0] = new Course(courseName, "CSE123s","100");
 			assertThat(course[0].getName()).isEqualTo(courseName);
 		});
 		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC;
@@ -126,7 +127,7 @@ class Course_Test
 	void Test_ParametrizedConstructor_NameStartsWithNumbers_ExceptionThrown()
 	{
 		String courseName = "123";
-		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> new Course(courseName, "CSE123s"));
+		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> new Course(courseName, "CSE123s","100"));
 		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -139,7 +140,7 @@ class Course_Test
 	{
 		String courseName = "CSE Subject";
 		Course[] course = {null};
-		assertDoesNotThrow(() ->course[0] = new Course(courseName,"CSE123s"));
+		assertDoesNotThrow(() ->course[0] = new Course(courseName,"CSE123s","100"));
 		assertThat(course[0].getName()).isEqualTo(courseName);
 	}
 
@@ -149,7 +150,7 @@ class Course_Test
 	void Test_ParametrizedConstructor_NameStartsWithSpace_ExceptionThrown()
 	{
 		String courseName = " CSE";
-		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> new Course(courseName, "CSE123s"));
+		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> new Course(courseName, "CSE123s","100"));
 		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_START_WITH_SPACE;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -161,7 +162,7 @@ class Course_Test
 	void Test_ParametrizedConstructor_NameIsEmpty_ExceptionThrown()
 	{
 		String courseName = "";
-		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> new Course(courseName, "CSE123s"));
+		InvalidCourseNameException exception = assertThrows(InvalidCourseNameException.class, () -> new Course(courseName, "CSE123s","100"));
 		String expectedMessage = InvalidCourseNameException.INVALID_COURSE_NAME_ALPHABETIC;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -290,7 +291,7 @@ class Course_Test
 	{
 		Course[] course = {null};
 		String courseCode = "CSE123";
-		assertDoesNotThrow(() ->course[0] = new Course("Computer Architecture",courseCode));
+		assertDoesNotThrow(() ->course[0] = new Course("Computer Architecture",courseCode,"100"));
 		assertThat(course[0].getCode()).isEqualTo(courseCode);
 	}
 
@@ -301,7 +302,7 @@ class Course_Test
 	{
 		Course[] course = {null};
 		String courseCode = "CSE123s";
-		assertDoesNotThrow(() ->course[0] = new Course("Computer Architecture",courseCode));
+		assertDoesNotThrow(() ->course[0] = new Course("Computer Architecture",courseCode,"100"));
 		assertThat(course[0].getCode()).isEqualTo(courseCode);
 	}
 
@@ -311,7 +312,7 @@ class Course_Test
 	@ValueSource(strings = {"CS123","123"})
 	void Test_ParametrizedConstructor_NumberOfAlphabetIsLessThanThree_ExceptionThrown(String courseCode)
 	{
-		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode));
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode,"100"));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -323,7 +324,7 @@ class Course_Test
 	void Test_ParametrizedConstructor_NumberOfAlphabetIsGreaterThanThree_ExceptionThrown()
 	{
 		String courseCode = "CSEA123";
-		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode));
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode,"100"));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -335,7 +336,7 @@ class Course_Test
 	@ValueSource(strings = {"CSE12","cse"})
 	void Test_ParametrizedConstructor_NumberOfDigitsIsLessThanThree_ExceptionThrown(String courseCode)
 	{
-		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode));
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode,"100"));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -347,7 +348,7 @@ class Course_Test
 	void Test_ParametrizedConstructor_NumberOfDigitsIsGreaterThanThree_ExceptionThrown()
 	{
 		String courseCode = "CSE1234";
-		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode));
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode,"100"));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -359,7 +360,7 @@ class Course_Test
 	@ValueSource(strings = {"123CSE","cs123e"})
 	void Test_ParametrizedConstructor_DifferentOrder_ExceptionThrown(String courseCode)
 	{
-		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode));
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode,"100"));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -371,7 +372,7 @@ class Course_Test
 	@ValueSource(strings = {"CSE123S","CSE123A"})
 	void Test_ParametrizedConstructor_DifferentSeventhCharacter_ExceptionThrown(String courseCode)
 	{
-		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode));
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode,"100"));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_LAST_CHAR;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -383,7 +384,7 @@ class Course_Test
 	@ValueSource(strings = {"CSE 123","C@S123s","cse-123"})
 	void Test_ParametrizedConstructor_SpecialCharacter_ExceptionThrown(String courseCode)
 	{
-		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode));
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode,"100"));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
@@ -395,13 +396,56 @@ class Course_Test
 	@ValueSource(strings = {"CSE123sA","C@S123s1","CSE123s$","cse123ss"})
 	void Test_ParametrizedConstructor_ExtraItemAfterSeventh_ExceptionThrown(String courseCode)
 	{
-		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode));
+		InvalidCourseCodeException exception = assertThrows(InvalidCourseCodeException.class, () -> new Course("Computer Architecture",courseCode,"100"));
 		String expectedMessage = InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN;
 		String actualMessage = exception.getMessage();
 		assertThat(actualMessage).contains(expectedMessage);
 	}
 
+	@Test
+	@Tag("unit")
+	@Tag("blackbox")
+	void Test_setMaxMark_PositiveTesting()
+	{
+		String maxMark = "100";
+		assertDoesNotThrow(() ->course.setMaxMark(maxMark));
+		assertThat(course.getMaxMark()).isEqualTo(maxMark);
+	}
 
+	@ParameterizedTest
+	@Tag("unit")
+	@Tag("blackbox")
+	@ValueSource(strings = {"90","110",""," ","A","Zeyad"})
+	void Test_setMaxMark_InvalidMark_ExceptionThrown(String maxMark)
+	{
+		InvalidCourseMarkException exception = assertThrows(InvalidCourseMarkException.class, () -> course.setMaxMark(maxMark));
+		String expectedMessage = InvalidCourseMarkException.INVALID_COURSE_MARK;
+		String actualMessage = exception.getMessage();
+		assertThat(actualMessage).contains(expectedMessage);
+	}
+
+	@Test
+	@Tag("unit")
+	@Tag("blackbox")
+	void Test_ParametrizedConstructorMaxMark_PositiveTesting()
+	{
+		String maxMark = "100";
+		Course[] course = {null};
+		assertDoesNotThrow(() ->course[0] = new Course("Computer Architecture","CSE123s",maxMark));
+		assertThat(course[0].getMaxMark()).isEqualTo(maxMark);
+	}
+
+	@ParameterizedTest
+	@Tag("unit")
+	@Tag("blackbox")
+	@ValueSource(strings = {"90","110",""," ","A","Zeyad"})
+	void Test_ParametrizedConstructorMaxMark_InvalidMark_ExceptionThrown(String maxMark)
+	{
+		InvalidCourseMarkException exception = assertThrows(InvalidCourseMarkException.class, () -> new Course("Computer Architecture","CSE123s",maxMark));
+		String expectedMessage = InvalidCourseMarkException.INVALID_COURSE_MARK;
+		String actualMessage = exception.getMessage();
+		assertThat(actualMessage).contains(expectedMessage);
+	}
 	/*
 	 ************************************************************
 	 ************************************************************
