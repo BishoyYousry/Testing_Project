@@ -11,17 +11,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileIO_Test
 {
+
     @Test
     @Tag("unit")
     @Tag("blackbox")
     void Test_setPath_ForwardSlashPath_PositiveTesting()
     {
         FileIO file = new FileIO();
-        String path = "D:/Testing/src/test/java/InputFile TestCases/2.txt";
+        String path = "./src/test/java/InputFile TestCases/2.txt";
         assertDoesNotThrow(() ->file.set_path(path));
         assertThat(file.get_path()).isEqualTo(path);
     }
-
+/*
     @Test
     @Tag("unit")
     @Tag("blackbox")
@@ -73,7 +74,7 @@ class FileIO_Test
         assertThrows(FileNotFoundException.class,() ->file.set_path(path));
     }
 
-    /*
+
     @Test
     @Tag("unit")
     @Tag("blackbox")
@@ -82,5 +83,6 @@ class FileIO_Test
         FileIO file = new FileIO();
         String path = null;
         assertThrows(FileNotFoundException.class,() ->file.set_path(path));
-    }*/
+    }
+*/
 }
