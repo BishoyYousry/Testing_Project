@@ -41,7 +41,7 @@ public class Course {
 		return code;
 	}
 	public void setCode(String code) throws InvalidCourseCodeException{
-		if(code.length() != 6 &&code.length() != 7)
+		if(code.length() != 6 && code.length() != 7)
 			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);
 		else if(code.length() == 6 && !(code.matches("^[a-zA-Z]{3}[0-9]{3}$")))
 			throw new InvalidCourseCodeException(InvalidCourseCodeException.INVALID_COURSE_CODE_PATTERN);	
