@@ -8,7 +8,7 @@ public class Main
     public static void main(String[] args)
     {
         FileIO f = null;
-        String filePath = "../../test/java/InputFile TestCases/2.txt";
+        String filePath = "D:\\ASU\\Senior1\\2nd Term\\SW Testing\\Project_environmet\\src\\test\\java\\InputFile TestCases\\2.txt";
         try
         {
             f = new FileIO(filePath);

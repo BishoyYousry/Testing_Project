@@ -47,7 +47,8 @@ public class FileIO
      */
     public void set_path(String path) throws FileNotFoundException,NullPointerException
     {
-        path = "src/main/java/" + path;
+        if(!Paths.get(path).isAbsolute())
+            path = "src/main/java/" + path;
         path = Paths.get(path).toAbsolutePath().normalize().toString();
         path = path.replace('\\', '/');
         System.out.println(path);
