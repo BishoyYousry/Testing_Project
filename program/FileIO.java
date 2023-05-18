@@ -1,6 +1,7 @@
 package program;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.nio.file.Paths;
 
@@ -46,18 +47,12 @@ public class FileIO
      */
     public void set_path(String path) throws FileNotFoundException,NullPointerException
     {
-
+        path = "src/main/java/" + path;
+        path = Paths.get(path).toAbsolutePath().normalize().toString();
+        path = path.replace('\\', '/');
+        System.out.println(path);
         File file = new File(path);
-        try {
-            boolean created = file.createNewFile();
-            if (created) {
-                System.out.println("File created successfully.");
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred while creating the file: " + e.getMessage());
-        }
+
         if (file.exists())
         {
             this.path = path;
