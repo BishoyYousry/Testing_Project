@@ -47,6 +47,9 @@ public class FileIO
      */
     public void set_path(String path) throws FileNotFoundException,NullPointerException
     {
+        if(path == null)
+            throw new NullPointerException("The path is empty");
+
         File file = new File(path);
 
         if (file.exists())
