@@ -295,4 +295,23 @@ class FileIO_Test
         Course course = file.getCourse();
         assertThat(course.getName()).isEqualTo("");
     }
+
+    @Test
+    @Tag("integration")
+    @Tag("blackbox")
+    @Tag("bottomUp")
+    @DisplayName("The input file has repeated ids, so the program must throw InvalidStudentIdException")
+    void Test_read_file_TheInputFileHasRepeatedStudentIds_ThrowException()
+    {
+        try {
+            file.set_path("./src/test/java/InputFile TestCases/Test_read_file_TheInputFileHasRepeatedStudentIds_ThrowException.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        InvalidStudentIdException exception = assertThrows(InvalidStudentIdException.class,
+                file::read_file);
+        String actualMessage = exception.getMessage();
+        String expectedMessage = InvalidStudentIdException.INVALID_STUDENT_ID_REPEATED;
+        assertThat(actualMessage).isEqualTo(expectedMessage);
+    }
 }

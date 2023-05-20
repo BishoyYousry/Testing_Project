@@ -84,5 +84,4 @@ public class Main_Test {
         assertThrows(InvalidStudentNameException.class, ()->Main.main(null));
     }
 
-
 }
