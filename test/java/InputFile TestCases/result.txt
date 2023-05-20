@@ -1,9 +1,0 @@
-Subject Name: Computer Organization		Max Mark: 100
-
-Student name 	| Student number 	| GPA 	| Grade
----------------------------------------------------
-Youssef Emad 	| 1704764 		| 4 	| A+
-Omar AMonem 	| 1800453 		| 2.7 	| B-
-Zeyad Mohamed 	| 1705743 		| 1.3 	| D+
-Malek Malek 	| 1534984 		| 3.3 	| B+
-Bishoy Yousry 	| 1900733 		| 4 	| A+

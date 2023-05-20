@@ -23,6 +23,15 @@ class FileIO_Test
     private final FileIO file = new FileIO();
 
     @Test
+    @Tag("blackbox")
+    @Tag("integration")
+    @Tag("bottomUp")
+    void Test_FileIO_ParameterizedConstructor()
+    {
+        assertDoesNotThrow(()->new FileIO("./src/test/java/InputFile TestCases/Test_FileIO_ParameterizedConstructor.txt"));
+    }
+
+    @Test
     @Tag("unit")
     @Tag("blackbox")
     void Test_setPath_ForwardSlashPath_PositiveTesting()
@@ -247,6 +256,13 @@ class FileIO_Test
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        try {
+            file.read_file();
+        } catch (IOException | InvalidStudentMarksException | InvalidCourseNameException
+                | InvalidStudentIdException | InvalidStudentNameException
+                | InvalidCourseCodeException | InvalidCourseMarkException e) {
+            e.printStackTrace();
+        }
         assertDoesNotThrow(file::write_file);
         String expectedMessage = "Successfully wrote to the file.";
         assertThat(expectedMessage).isEqualTo(outputStreamCaptor.toString().trim());
@@ -277,6 +293,6 @@ class FileIO_Test
         String expectedMessage = "Successfully wrote to the file.";
         assertThat(expectedMessage).isEqualTo(outputStreamCaptor.toString().trim());
         Course course = file.getCourse();
-        assertThat(course.getName()).isEqualTo(null);
+        assertThat(course.getName()).isEqualTo("");
     }
 }
