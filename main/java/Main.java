@@ -1,39 +1,27 @@
 import Exceptions.*;
 import program.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main
 {
-    public static void main(String[] args) throws InvalidCourseMarkException {
-        FileIO f = null;
+    public static void main(String[] args) throws IOException,
+            InvalidCourseMarkException, InvalidStudentMarksException, InvalidCourseNameException,
+            InvalidStudentIdException, InvalidStudentNameException, InvalidCourseCodeException {
+        String path;
+        System.out.println("Enter excel file path: ");
+        Scanner scanner = new Scanner(System.in);
+        path = scanner.nextLine();
+        FileIO f;
+        f = new FileIO(path);
+        f.read_file();
         try
         {
-            f = new FileIO("./src/test/java/InputFile TestCases/Test_readFile_PositiveTesting.txt");
+            f.write_file();
         }
-        catch (FileNotFoundException e)
+        catch (IOException e)
         {
             e.printStackTrace();
-        }
-        if(f!=null)
-        {
-            try
-            {
-                f.read_file();
-            }
-            catch (InvalidStudentMarksException | InvalidCourseNameException | InvalidStudentIdException |
-                   InvalidStudentNameException | InvalidCourseCodeException | IOException e)
-            {
-                e.printStackTrace();
-            }
-            try
-            {
-                f.write_file();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
         }
     }
 }
