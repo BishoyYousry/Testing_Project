@@ -9,7 +9,7 @@ public class Main
         FileIO f = null;
         try
         {
-            f = new FileIO("./src/test/java/InputFile TestCases/2.txt");
+            f = new FileIO("./src/test/java/InputFile TestCases/Test_readFile_PositiveTesting.txt");
         }
         catch (FileNotFoundException e)
         {

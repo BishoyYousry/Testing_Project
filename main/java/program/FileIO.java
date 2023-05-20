@@ -104,7 +104,18 @@ public class FileIO
      */
     public void write_file() throws IOException
     {
-        String filePath = path.substring(0, path.lastIndexOf('/') + 1) + "Results.csv";
+        String filePath = null;
+        if(path.contains("/"))
+        {
+            filePath = path.substring(0, path.lastIndexOf('/') + 1) + "Results_";
+            filePath = filePath + path.substring(path.lastIndexOf('/') + 1);
+        }
+        else
+        {
+            filePath = path.substring(0, path.lastIndexOf('\\') + 1) + "Results_";
+            filePath = filePath + path.substring(path.lastIndexOf('\\') + 1);
+        }
+        filePath = filePath.replace(".txt",".csv");
         try (FileWriter writer = new FileWriter(filePath)) {
             StringBuilder contentBuilder = new StringBuilder();
 
