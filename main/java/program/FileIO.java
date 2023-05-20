@@ -118,9 +118,7 @@ public class FileIO
                 contentBuilder.append(student.getGpa()).append(",");
                 contentBuilder.append(student.getGrade()).append("\n");
             }
-
             writer.write(contentBuilder.toString());
-
             System.out.println("Successfully wrote to the file.");
         }
     }

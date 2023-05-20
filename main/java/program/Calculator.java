@@ -2,6 +2,7 @@ package program;
 
 
 public class Calculator {
+
     /*
      * Description: Compute the total mark for a student
      * 
@@ -22,7 +23,7 @@ public class Calculator {
      * Output: Student Grade: String
      * 
      */    
-    public static String compute_Grade(double mark){
+    public static String compute_Grade(int mark){
 		String Grade;
 		if(mark >= 97)
 			Grade = "A+";
