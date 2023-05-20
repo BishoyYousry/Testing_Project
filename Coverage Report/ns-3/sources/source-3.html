@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (53/53)
+    (61/61)
   </span>
 </td>
 </tr>
@@ -179,58 +179,74 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">104</i>&nbsp;     */
 <i class="no-highlight">105</i>&nbsp;    public void write_file() throws IOException
 <i class="no-highlight">106</i>&nbsp;    {
-<b class="fc"><i class="no-highlight">107</i>&nbsp;        String filePath = path.substring(0, path.lastIndexOf(&#39;/&#39;) + 1) + &quot;Results.csv&quot;;</b>
-<b class="fc"><i class="no-highlight">108</i>&nbsp;        try (FileWriter writer = new FileWriter(filePath)) {</b>
-<b class="fc"><i class="no-highlight">109</i>&nbsp;            StringBuilder contentBuilder = new StringBuilder();</b>
-<i class="no-highlight">110</i>&nbsp;
-<b class="fc"><i class="no-highlight">111</i>&nbsp;            contentBuilder.append(&quot;Subject Name:&quot;).append(course.getName()).append(&quot;,,,,,&quot;);</b>
-<b class="fc"><i class="no-highlight">112</i>&nbsp;            contentBuilder.append(&quot;Max Mark: 100\n\n&quot;);</b>
-<b class="fc"><i class="no-highlight">113</i>&nbsp;            contentBuilder.append(&quot;Student name,Student number,GPA,Grade\n&quot;);</b>
-<i class="no-highlight">114</i>&nbsp;
-<b class="fc"><i class="no-highlight">115</i>&nbsp;            for (Student student : students) {</b>
-<b class="fc"><i class="no-highlight">116</i>&nbsp;                contentBuilder.append(student.getName()).append(&quot;,&quot;);</b>
-<b class="fc"><i class="no-highlight">117</i>&nbsp;                contentBuilder.append(student.getId()).append(&quot;,&quot;);</b>
-<b class="fc"><i class="no-highlight">118</i>&nbsp;                contentBuilder.append(student.getGpa()).append(&quot;,&quot;);</b>
-<b class="fc"><i class="no-highlight">119</i>&nbsp;                contentBuilder.append(student.getGrade()).append(&quot;\n&quot;);</b>
-<b class="fc"><i class="no-highlight">120</i>&nbsp;            }</b>
-<b class="fc"><i class="no-highlight">121</i>&nbsp;            writer.write(contentBuilder.toString());</b>
-<b class="fc"><i class="no-highlight">122</i>&nbsp;            System.out.println(&quot;Successfully wrote to the file.&quot;);</b>
-<b class="fc"><i class="no-highlight">123</i>&nbsp;        }</b>
-<i class="no-highlight">124</i>&nbsp;    }
+<i class="no-highlight">107</i>&nbsp;        String filePath;
+<b class="fc"><i class="no-highlight">108</i>&nbsp;        if(path.contains(&quot;/&quot;))</b>
+<i class="no-highlight">109</i>&nbsp;        {
+<b class="fc"><i class="no-highlight">110</i>&nbsp;            filePath = path.substring(0, path.lastIndexOf(&#39;/&#39;) + 1) + &quot;Results_&quot;;</b>
+<b class="fc"><i class="no-highlight">111</i>&nbsp;            filePath = filePath + path.substring(path.lastIndexOf(&#39;/&#39;) + 1);</b>
+<i class="no-highlight">112</i>&nbsp;        }
+<i class="no-highlight">113</i>&nbsp;        else
+<i class="no-highlight">114</i>&nbsp;        {
+<b class="fc"><i class="no-highlight">115</i>&nbsp;            filePath = path.substring(0, path.lastIndexOf(&#39;\\&#39;) + 1) + &quot;Results_&quot;;</b>
+<b class="fc"><i class="no-highlight">116</i>&nbsp;            filePath = filePath + path.substring(path.lastIndexOf(&#39;\\&#39;) + 1);</b>
+<i class="no-highlight">117</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">118</i>&nbsp;        filePath = filePath.replace(&quot;.txt&quot;,&quot;.csv&quot;);</b>
+<b class="fc"><i class="no-highlight">119</i>&nbsp;        try (FileWriter writer = new FileWriter(filePath)) {</b>
+<b class="fc"><i class="no-highlight">120</i>&nbsp;            StringBuilder contentBuilder = new StringBuilder();</b>
+<i class="no-highlight">121</i>&nbsp;
+<b class="fc"><i class="no-highlight">122</i>&nbsp;            contentBuilder.append(&quot;Subject Name:&quot;).append(course.getName()).append(&quot;,,,,,&quot;);</b>
+<b class="fc"><i class="no-highlight">123</i>&nbsp;            contentBuilder.append(&quot;Max Mark: 100\n\n&quot;);</b>
+<b class="fc"><i class="no-highlight">124</i>&nbsp;            contentBuilder.append(&quot;Student name,Student number,GPA,Grade\n&quot;);</b>
 <i class="no-highlight">125</i>&nbsp;
-<i class="no-highlight">126</i>&nbsp;
-<i class="no-highlight">127</i>&nbsp;    /*
-<i class="no-highlight">128</i>&nbsp;     * Description: store data for each student when parsing file line by line
-<i class="no-highlight">129</i>&nbsp;     *
-<i class="no-highlight">130</i>&nbsp;     * Input: Every line in file , line number as line number 0 holds course info while other lines holds student info
-<i class="no-highlight">131</i>&nbsp;     *
-<i class="no-highlight">132</i>&nbsp;     * Output: The function return nothing as it stores the data in attributes which are course &amp; arraylist of students
-<i class="no-highlight">133</i>&nbsp;     *
-<i class="no-highlight">134</i>&nbsp;     */
-<i class="no-highlight">135</i>&nbsp;    public void store_data(String line, int lineNumber) throws InvalidCourseNameException, InvalidCourseCodeException, InvalidStudentMarksException, InvalidStudentIdException, InvalidStudentNameException, InvalidCourseMarkException {
-<b class="fc"><i class="no-highlight">136</i>&nbsp;        String[] words =line.split(&quot;,&quot;);</b>
-<b class="fc"><i class="no-highlight">137</i>&nbsp;        if(lineNumber == 0)</b>
-<i class="no-highlight">138</i>&nbsp;        {
-<b class="fc"><i class="no-highlight">139</i>&nbsp;            course.setName(words[0]);</b>
-<b class="fc"><i class="no-highlight">140</i>&nbsp;            course.setCode(words[1]);</b>
-<b class="fc"><i class="no-highlight">141</i>&nbsp;            course.setMaxMark(words[2]);</b>
-<i class="no-highlight">142</i>&nbsp;        }
-<i class="no-highlight">143</i>&nbsp;        else
-<i class="no-highlight">144</i>&nbsp;        {
-<b class="fc"><i class="no-highlight">145</i>&nbsp;            Student student = new Student();</b>
-<b class="fc"><i class="no-highlight">146</i>&nbsp;            student.setName(words[0]);</b>
-<b class="fc"><i class="no-highlight">147</i>&nbsp;            student.setId(words[1]);</b>
-<b class="fc"><i class="no-highlight">148</i>&nbsp;            student.setActivitiesMark(Integer.parseInt(words[2]));</b>
-<b class="fc"><i class="no-highlight">149</i>&nbsp;            student.setOralPracticalMark(Integer.parseInt(words[3]));</b>
-<b class="fc"><i class="no-highlight">150</i>&nbsp;            student.setMidtermMark(Integer.parseInt(words[4]));</b>
-<b class="fc"><i class="no-highlight">151</i>&nbsp;            student.setFinalMark(Integer.parseInt(words[5]));</b>
-<b class="fc"><i class="no-highlight">152</i>&nbsp;            student.setTotalMark(Calculator.compute_total_mark(student.getActivitiesMark(),student.getOralPracticalMark(),student.getMidtermMark(),student.getFinalMark()));</b>
-<b class="fc"><i class="no-highlight">153</i>&nbsp;            student.setGrade(Calculator.compute_Grade(student.getTotalMark()));</b>
-<b class="fc"><i class="no-highlight">154</i>&nbsp;            student.setGpa(Calculator.compute_GPA(student.getGrade()));</b>
-<b class="fc"><i class="no-highlight">155</i>&nbsp;            students.add(student);</b>
-<i class="no-highlight">156</i>&nbsp;        }
-<i class="no-highlight">157</i>&nbsp;    }
-<i class="no-highlight">158</i>&nbsp;}
+<b class="fc"><i class="no-highlight">126</i>&nbsp;            for (Student student : students) {</b>
+<b class="fc"><i class="no-highlight">127</i>&nbsp;                contentBuilder.append(student.getName()).append(&quot;,&quot;);</b>
+<b class="fc"><i class="no-highlight">128</i>&nbsp;                contentBuilder.append(student.getId()).append(&quot;,&quot;);</b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;                contentBuilder.append(student.getGpa()).append(&quot;,&quot;);</b>
+<b class="fc"><i class="no-highlight">130</i>&nbsp;                contentBuilder.append(student.getGrade()).append(&quot;\n&quot;);</b>
+<b class="fc"><i class="no-highlight">131</i>&nbsp;            }</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;            writer.write(contentBuilder.toString());</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;            System.out.println(&quot;Successfully wrote to the file.&quot;);</b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;        }</b>
+<i class="no-highlight">135</i>&nbsp;    }
+<i class="no-highlight">136</i>&nbsp;
+<i class="no-highlight">137</i>&nbsp;
+<i class="no-highlight">138</i>&nbsp;    /*
+<i class="no-highlight">139</i>&nbsp;     * Description: store data for each student when parsing file line by line
+<i class="no-highlight">140</i>&nbsp;     *
+<i class="no-highlight">141</i>&nbsp;     * Input: Every line in file , line number as line number 0 holds course info while other lines holds student info
+<i class="no-highlight">142</i>&nbsp;     *
+<i class="no-highlight">143</i>&nbsp;     * Output: The function return nothing as it stores the data in attributes which are course &amp; arraylist of students
+<i class="no-highlight">144</i>&nbsp;     *
+<i class="no-highlight">145</i>&nbsp;     */
+<i class="no-highlight">146</i>&nbsp;    public void store_data(String line, int lineNumber) throws InvalidCourseNameException, InvalidCourseCodeException, InvalidStudentMarksException, InvalidStudentIdException, InvalidStudentNameException, InvalidCourseMarkException {
+<b class="fc"><i class="no-highlight">147</i>&nbsp;        String[] words =line.split(&quot;,&quot;);</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;        if(lineNumber == 0)</b>
+<i class="no-highlight">149</i>&nbsp;        {
+<b class="fc"><i class="no-highlight">150</i>&nbsp;            course.setName(words[0]);</b>
+<b class="fc"><i class="no-highlight">151</i>&nbsp;            course.setCode(words[1]);</b>
+<b class="fc"><i class="no-highlight">152</i>&nbsp;            course.setMaxMark(words[2]);</b>
+<i class="no-highlight">153</i>&nbsp;        }
+<i class="no-highlight">154</i>&nbsp;        else
+<i class="no-highlight">155</i>&nbsp;        {
+<b class="fc"><i class="no-highlight">156</i>&nbsp;            Student student = new Student();</b>
+<b class="fc"><i class="no-highlight">157</i>&nbsp;            student.setName(words[0]);</b>
+<b class="fc"><i class="no-highlight">158</i>&nbsp;            student.setId(words[1]);</b>
+<b class="fc"><i class="no-highlight">159</i>&nbsp;            student.setActivitiesMark(Integer.parseInt(words[2]));</b>
+<b class="fc"><i class="no-highlight">160</i>&nbsp;            student.setOralPracticalMark(Integer.parseInt(words[3]));</b>
+<b class="fc"><i class="no-highlight">161</i>&nbsp;            student.setMidtermMark(Integer.parseInt(words[4]));</b>
+<b class="fc"><i class="no-highlight">162</i>&nbsp;            student.setFinalMark(Integer.parseInt(words[5]));</b>
+<b class="fc"><i class="no-highlight">163</i>&nbsp;            student.setTotalMark(Calculator.compute_total_mark(student.getActivitiesMark(),student.getOralPracticalMark(),student.getMidtermMark(),student.getFinalMark()));</b>
+<b class="fc"><i class="no-highlight">164</i>&nbsp;            student.setGrade(Calculator.compute_Grade(student.getTotalMark()));</b>
+<b class="fc"><i class="no-highlight">165</i>&nbsp;            student.setGpa(Calculator.compute_GPA(student.getGrade()));</b>
+<b class="fc"><i class="no-highlight">166</i>&nbsp;            boolean hasInvalidId = students.stream().anyMatch(n -&gt; n.getId().equals(words[1]));</b>
+<i class="no-highlight">167</i>&nbsp;
+<b class="fc"><i class="no-highlight">168</i>&nbsp;            if (hasInvalidId) {</b>
+<b class="fc"><i class="no-highlight">169</i>&nbsp;                throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_REPEATED);</b>
+<i class="no-highlight">170</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">171</i>&nbsp;            students.add(student);</b>
+<i class="no-highlight">172</i>&nbsp;        }
+<i class="no-highlight">173</i>&nbsp;    }
+<i class="no-highlight">174</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -257,7 +273,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-05-20 13:24</div>
+    <div style="float:right;">generated on 2023-05-20 20:59</div>
 </div>
 </body>
 </html>

@@ -77,106 +77,107 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;
 <b class="nc"><i class="no-highlight">4</i>&nbsp;public class Calculator {</b>
-<i class="no-highlight">5</i>&nbsp;    /*
-<i class="no-highlight">6</i>&nbsp;     * Description: Compute the total mark for a student
-<i class="no-highlight">7</i>&nbsp;     * 
-<i class="no-highlight">8</i>&nbsp;     * Input: activitiesMark, oralPracticalMark, midtermMark, finalMark: int
-<i class="no-highlight">9</i>&nbsp;     * 
-<i class="no-highlight">10</i>&nbsp;     * Output: Total Student Marks: int
-<i class="no-highlight">11</i>&nbsp;     * 
-<i class="no-highlight">12</i>&nbsp;     */
-<i class="no-highlight">13</i>&nbsp;    public static int compute_total_mark(int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark){
-<b class="fc"><i class="no-highlight">14</i>&nbsp;        return (activitiesMark+oralPracticalMark+midtermMark+finalMark);</b>
-<i class="no-highlight">15</i>&nbsp;    }
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;    /*
-<i class="no-highlight">18</i>&nbsp;     * Description: Convert student total mark to Grade
-<i class="no-highlight">19</i>&nbsp;     * 
-<i class="no-highlight">20</i>&nbsp;     * Input: Total Mark: int
-<i class="no-highlight">21</i>&nbsp;     * 
-<i class="no-highlight">22</i>&nbsp;     * Output: Student Grade: String
-<i class="no-highlight">23</i>&nbsp;     * 
-<i class="no-highlight">24</i>&nbsp;     */    
-<i class="no-highlight">25</i>&nbsp;    public static String compute_Grade(int mark){
-<i class="no-highlight">26</i>&nbsp;		String Grade;
-<b class="fc"><i class="no-highlight">27</i>&nbsp;		if(mark &gt;= 97)</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;			Grade = &quot;A+&quot;;</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;		else if(mark &gt;= 93)</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;			Grade = &quot;A&quot;;</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;		else if(mark &gt;= 89)</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;			Grade = &quot;A-&quot;;</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;		else if(mark &gt;= 84)</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;			Grade = &quot;B+&quot;;</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;		else if(mark &gt;= 80)</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;			Grade = &quot;B&quot;;</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;		else if(mark &gt;= 76)</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;			Grade = &quot;B-&quot;;</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;		else if(mark &gt;= 73)</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;			Grade = &quot;C+&quot;;</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;		else if(mark &gt;= 70)</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;			Grade = &quot;C&quot;;</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;		else if(mark &gt;= 67)</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;			Grade = &quot;C-&quot;;</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;		else if(mark &gt;= 64)</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;			Grade = &quot;D+&quot;;	</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;		else if(mark &gt;= 60)	</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;			Grade = &quot;D&quot;;</b>
-<i class="no-highlight">49</i>&nbsp;		else
-<b class="fc"><i class="no-highlight">50</i>&nbsp;			Grade = &quot;F&quot;;</b>
-<i class="no-highlight">51</i>&nbsp;	
-<b class="fc"><i class="no-highlight">52</i>&nbsp;		return Grade;</b>
-<i class="no-highlight">53</i>&nbsp;    }
-<i class="no-highlight">54</i>&nbsp;
-<i class="no-highlight">55</i>&nbsp;    /*
-<i class="no-highlight">56</i>&nbsp;     * Description: Convert student Grade to GPA
-<i class="no-highlight">57</i>&nbsp;     * 
-<i class="no-highlight">58</i>&nbsp;     * Input: Student Grade: String
-<i class="no-highlight">59</i>&nbsp;     * 
-<i class="no-highlight">60</i>&nbsp;     * Output: Student GPA: String
-<i class="no-highlight">61</i>&nbsp;     * 
-<i class="no-highlight">62</i>&nbsp;     */
-<i class="no-highlight">63</i>&nbsp;    public static String compute_GPA(String Grade){
-<i class="no-highlight">64</i>&nbsp;		String GPA;
-<i class="no-highlight">65</i>&nbsp;
-<b class="fc"><i class="no-highlight">66</i>&nbsp;		switch (Grade) {</b>
-<i class="no-highlight">67</i>&nbsp;			case &quot;F&quot;:
-<b class="fc"><i class="no-highlight">68</i>&nbsp;				GPA = &quot;0&quot;;</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;				break;</b>
-<i class="no-highlight">70</i>&nbsp;			case &quot;D&quot;:
-<b class="fc"><i class="no-highlight">71</i>&nbsp;				GPA = &quot;1&quot;;</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;				break;</b>
-<i class="no-highlight">73</i>&nbsp;			case &quot;D+&quot;:
-<b class="fc"><i class="no-highlight">74</i>&nbsp;				GPA = &quot;1.3&quot;;</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;				break;</b>
-<i class="no-highlight">76</i>&nbsp;			case &quot;C-&quot;:
-<b class="fc"><i class="no-highlight">77</i>&nbsp;				GPA = &quot;1.7&quot;;</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;				break;</b>
-<i class="no-highlight">79</i>&nbsp;			case &quot;C&quot;:
-<b class="fc"><i class="no-highlight">80</i>&nbsp;				GPA = &quot;2&quot;;</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;				break;</b>
-<i class="no-highlight">82</i>&nbsp;			case &quot;C+&quot;:
-<b class="fc"><i class="no-highlight">83</i>&nbsp;				GPA = &quot;2.3&quot;;</b>
-<b class="fc"><i class="no-highlight">84</i>&nbsp;				break;</b>
-<i class="no-highlight">85</i>&nbsp;			case &quot;B-&quot;:
-<b class="fc"><i class="no-highlight">86</i>&nbsp;				GPA = &quot;2.7&quot;;</b>
-<b class="fc"><i class="no-highlight">87</i>&nbsp;				break;</b>
-<i class="no-highlight">88</i>&nbsp;			case &quot;B&quot;:
-<b class="fc"><i class="no-highlight">89</i>&nbsp;				GPA = &quot;3&quot;;</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;				break;</b>
-<i class="no-highlight">91</i>&nbsp;			case &quot;B+&quot;:
-<b class="fc"><i class="no-highlight">92</i>&nbsp;				GPA = &quot;3.3&quot;;</b>
-<b class="fc"><i class="no-highlight">93</i>&nbsp;				break;</b>
-<i class="no-highlight">94</i>&nbsp;			case &quot;A-&quot;:
-<b class="fc"><i class="no-highlight">95</i>&nbsp;				GPA = &quot;3.7&quot;;</b>
-<b class="fc"><i class="no-highlight">96</i>&nbsp;				break;</b>
-<i class="no-highlight">97</i>&nbsp;			default:
-<b class="fc"><i class="no-highlight">98</i>&nbsp;				GPA = &quot;4&quot;;</b>
-<i class="no-highlight">99</i>&nbsp;				break;
-<i class="no-highlight">100</i>&nbsp;		}
-<i class="no-highlight">101</i>&nbsp;
-<b class="fc"><i class="no-highlight">102</i>&nbsp;		return GPA;</b>
-<i class="no-highlight">103</i>&nbsp;    }
-<i class="no-highlight">104</i>&nbsp;}
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;    /*
+<i class="no-highlight">7</i>&nbsp;     * Description: Compute the total mark for a student
+<i class="no-highlight">8</i>&nbsp;     * 
+<i class="no-highlight">9</i>&nbsp;     * Input: activitiesMark, oralPracticalMark, midtermMark, finalMark: int
+<i class="no-highlight">10</i>&nbsp;     * 
+<i class="no-highlight">11</i>&nbsp;     * Output: Total Student Marks: int
+<i class="no-highlight">12</i>&nbsp;     * 
+<i class="no-highlight">13</i>&nbsp;     */
+<i class="no-highlight">14</i>&nbsp;    public static int compute_total_mark(int activitiesMark, int oralPracticalMark, int midtermMark, int finalMark){
+<b class="fc"><i class="no-highlight">15</i>&nbsp;        return (activitiesMark+oralPracticalMark+midtermMark+finalMark);</b>
+<i class="no-highlight">16</i>&nbsp;    }
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;    /*
+<i class="no-highlight">19</i>&nbsp;     * Description: Convert student total mark to Grade
+<i class="no-highlight">20</i>&nbsp;     * 
+<i class="no-highlight">21</i>&nbsp;     * Input: Total Mark: int
+<i class="no-highlight">22</i>&nbsp;     * 
+<i class="no-highlight">23</i>&nbsp;     * Output: Student Grade: String
+<i class="no-highlight">24</i>&nbsp;     * 
+<i class="no-highlight">25</i>&nbsp;     */    
+<i class="no-highlight">26</i>&nbsp;    public static String compute_Grade(int mark){
+<i class="no-highlight">27</i>&nbsp;		String Grade;
+<b class="fc"><i class="no-highlight">28</i>&nbsp;		if(mark &gt;= 97)</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;			Grade = &quot;A+&quot;;</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;		else if(mark &gt;= 93)</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;			Grade = &quot;A&quot;;</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;		else if(mark &gt;= 89)</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;			Grade = &quot;A-&quot;;</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;		else if(mark &gt;= 84)</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;			Grade = &quot;B+&quot;;</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;		else if(mark &gt;= 80)</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;			Grade = &quot;B&quot;;</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;		else if(mark &gt;= 76)</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;			Grade = &quot;B-&quot;;</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;		else if(mark &gt;= 73)</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;			Grade = &quot;C+&quot;;</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;		else if(mark &gt;= 70)</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;			Grade = &quot;C&quot;;</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;		else if(mark &gt;= 67)</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;			Grade = &quot;C-&quot;;</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;		else if(mark &gt;= 64)</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;			Grade = &quot;D+&quot;;	</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;		else if(mark &gt;= 60)	</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;			Grade = &quot;D&quot;;</b>
+<i class="no-highlight">50</i>&nbsp;		else
+<b class="fc"><i class="no-highlight">51</i>&nbsp;			Grade = &quot;F&quot;;</b>
+<i class="no-highlight">52</i>&nbsp;	
+<b class="fc"><i class="no-highlight">53</i>&nbsp;		return Grade;</b>
+<i class="no-highlight">54</i>&nbsp;    }
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;    /*
+<i class="no-highlight">57</i>&nbsp;     * Description: Convert student Grade to GPA
+<i class="no-highlight">58</i>&nbsp;     * 
+<i class="no-highlight">59</i>&nbsp;     * Input: Student Grade: String
+<i class="no-highlight">60</i>&nbsp;     * 
+<i class="no-highlight">61</i>&nbsp;     * Output: Student GPA: String
+<i class="no-highlight">62</i>&nbsp;     * 
+<i class="no-highlight">63</i>&nbsp;     */
+<i class="no-highlight">64</i>&nbsp;    public static String compute_GPA(String Grade){
+<i class="no-highlight">65</i>&nbsp;		String GPA;
+<i class="no-highlight">66</i>&nbsp;
+<b class="fc"><i class="no-highlight">67</i>&nbsp;		switch (Grade) {</b>
+<i class="no-highlight">68</i>&nbsp;			case &quot;F&quot;:
+<b class="fc"><i class="no-highlight">69</i>&nbsp;				GPA = &quot;0&quot;;</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;				break;</b>
+<i class="no-highlight">71</i>&nbsp;			case &quot;D&quot;:
+<b class="fc"><i class="no-highlight">72</i>&nbsp;				GPA = &quot;1&quot;;</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;				break;</b>
+<i class="no-highlight">74</i>&nbsp;			case &quot;D+&quot;:
+<b class="fc"><i class="no-highlight">75</i>&nbsp;				GPA = &quot;1.3&quot;;</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;				break;</b>
+<i class="no-highlight">77</i>&nbsp;			case &quot;C-&quot;:
+<b class="fc"><i class="no-highlight">78</i>&nbsp;				GPA = &quot;1.7&quot;;</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;				break;</b>
+<i class="no-highlight">80</i>&nbsp;			case &quot;C&quot;:
+<b class="fc"><i class="no-highlight">81</i>&nbsp;				GPA = &quot;2&quot;;</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;				break;</b>
+<i class="no-highlight">83</i>&nbsp;			case &quot;C+&quot;:
+<b class="fc"><i class="no-highlight">84</i>&nbsp;				GPA = &quot;2.3&quot;;</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;				break;</b>
+<i class="no-highlight">86</i>&nbsp;			case &quot;B-&quot;:
+<b class="fc"><i class="no-highlight">87</i>&nbsp;				GPA = &quot;2.7&quot;;</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;				break;</b>
+<i class="no-highlight">89</i>&nbsp;			case &quot;B&quot;:
+<b class="fc"><i class="no-highlight">90</i>&nbsp;				GPA = &quot;3&quot;;</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;				break;</b>
+<i class="no-highlight">92</i>&nbsp;			case &quot;B+&quot;:
+<b class="fc"><i class="no-highlight">93</i>&nbsp;				GPA = &quot;3.3&quot;;</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;				break;</b>
+<i class="no-highlight">95</i>&nbsp;			case &quot;A-&quot;:
+<b class="fc"><i class="no-highlight">96</i>&nbsp;				GPA = &quot;3.7&quot;;</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;				break;</b>
+<i class="no-highlight">98</i>&nbsp;			default:
+<b class="fc"><i class="no-highlight">99</i>&nbsp;				GPA = &quot;4&quot;;</b>
+<i class="no-highlight">100</i>&nbsp;				break;
+<i class="no-highlight">101</i>&nbsp;		}
+<i class="no-highlight">102</i>&nbsp;
+<b class="fc"><i class="no-highlight">103</i>&nbsp;		return GPA;</b>
+<i class="no-highlight">104</i>&nbsp;    }
+<i class="no-highlight">105</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -203,7 +204,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-05-20 13:24</div>
+    <div style="float:right;">generated on 2023-05-20 20:59</div>
 </div>
 </body>
 </html>
