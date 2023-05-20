@@ -104,7 +104,7 @@ public class FileIO
      */
     public void write_file() throws IOException
     {
-        String filePath = null;
+        String filePath;
         if(path.contains("/"))
         {
             filePath = path.substring(0, path.lastIndexOf('/') + 1) + "Results_";

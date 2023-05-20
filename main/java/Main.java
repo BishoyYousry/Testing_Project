@@ -9,7 +9,7 @@ public class Main
             InvalidCourseMarkException, InvalidStudentMarksException, InvalidCourseNameException,
             InvalidStudentIdException, InvalidStudentNameException, InvalidCourseCodeException {
         String path;
-        System.out.println("Enter excel file path: ");
+        System.out.println("Enter the file path: ");
         Scanner scanner = new Scanner(System.in);
         path = scanner.nextLine();
         FileIO f;
