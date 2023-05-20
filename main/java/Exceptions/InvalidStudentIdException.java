@@ -8,6 +8,7 @@ public class InvalidStudentIdException extends Exception{
 	public static final String INVALID_STUDENT_ID_ALPHANUMERIC = "Student id must contain alphanumeric char or number";
 	public static final String INVALID_STUDENT_ID_DOES_NOT_START_WITH_NUMBERS = "Student id must start with numbers";
 	public static final String INVALID_STUDENT_ID_GENERAL = "Invalid Student id";
+	public static final String INVALID_STUDENT_ID_REPEATED = "Invalid Student ID - The ID is repeated";
 	
 	public InvalidStudentIdException()
 	{

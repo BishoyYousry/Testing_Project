@@ -163,11 +163,11 @@ public class FileIO
             student.setTotalMark(Calculator.compute_total_mark(student.getActivitiesMark(),student.getOralPracticalMark(),student.getMidtermMark(),student.getFinalMark()));
             student.setGrade(Calculator.compute_Grade(student.getTotalMark()));
             student.setGpa(Calculator.compute_GPA(student.getGrade()));
-            students.forEach((n) -> {
-                if (n.getId() == words[1]) {
-                    throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_GENERAL);
-                }
-            });
+            boolean hasInvalidId = students.stream().anyMatch(n -> n.getId().equals(words[1]));
+
+            if (hasInvalidId) {
+                throw new InvalidStudentIdException(InvalidStudentIdException.INVALID_STUDENT_ID_REPEATED);
+            }
             students.add(student);
         }
     }
